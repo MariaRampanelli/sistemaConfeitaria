@@ -34,6 +34,6 @@ Ao questionar Lilian pelas funcionalidades desejadas no novo sistema, a dona da 
   npm init -y
   npm install express
   npm start
-  
+```
  Como o sistema rodará na porta 3000, acesse no navegador http://localhost:3000
   

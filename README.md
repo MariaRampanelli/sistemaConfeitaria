@@ -1,6 +1,6 @@
 # SistemaConfeitaria
 
-## Alunas: Maria Eduarda Rampanelli (20230003566) e Isadora
+## Alunas: Maria Eduarda Rampanelli (20230003566) e Isadora Sbeghen de Campos (20230002890)
 
 Lilian Sweets é uma mini empresa localizada em Chapecó, que atua no ramo alimentício com a produção e venda de doces artesanais. Entre os produtos oferecidos estão brownies, bolos de pote, bombons, tortinhas e, sob encomenda, tortas e bolos de festa. O negócio é conduzido atualmente de forma individual, sem funcionários, sendo todas as atividades realizadas pela própria proprietária.
 

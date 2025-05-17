@@ -1,0 +1,46 @@
+REQUISITOS FUNCIONAIS
+
+ID - Requisito - Tipo de usuário - Descrição
+
+RF01 - Manter usuário - Administrador, cliente, usuário
+O sistema deverá permitir o cadastro de usuário no sistema informando nome, e-mail, senha e permissão.
+
+RF02 - Login - Administrador, cliente
+O sistema deverá permitir o login dos usuários mediante e-mail e senha.
+
+RF03 - Manter encomenda - Administrador
+O sistema deverá permitir o cadastro de encomendas. Toda encomenda possui o nome da pessoa que encomendou, o nome do produto, a data de entrega, o valor, a forma de pagamento e o tipo da entrega (retirada ou entrega).
+
+RF04 - Manter insumos - Administrador
+O sistema deverá permitir o cadastro de insumos. Todo insumo possui o nome do insumo, valor do insumo e quantidade.
+
+RF05 - Controlar estoque - Administrador
+O sistema deverá permitir a visualização dos produtos e dos insumos disponíveis no estoque. É possível editar a quantidade de um insumo do estoque. Deve permitir filtragem por categoria (produto/insumo) e por nome.
+
+RF06 - Manter cardápio - Administrador
+O sistema deverá permitir o cadastro de cardápios. Todo cardápio possui o produto, que no momento que é selecionado trará a descrição e o valor.
+
+RF07 - Manter vendas - Administrador
+O sistema deverá permitir o cadastro de vendas. Toda venda possui o dia em que foi realizada, a forma de pagamento, o produto que foi vendido, a quantidade vendida e o valor.
+
+RF08 - Manter produto - Administrador
+O sistema deverá permitir o cadastro de produtos. Todo produto possui o nome, a data de validade, a descrição, o valor e a quantidade.
+
+RF09 - Gerar relatório de entrada - Administrador
+O sistema deverá gerar um relatório informando os valores recebidos, sendo possível realizar um filtro pela data e seu tipo de pagamento.
+
+RF10 - Gerar relatório de saída - Administrador
+O sistema deverá gerar um relatório informando os valores gastos no mês.
+
+RF11 - Gerar relatório de estoque - Administrador
+O sistema deverá gerar um relatório informando o estado do estoque. Deverá informar os insumos e sua quantidade.
+
+RF12 - Gerar relatório de pedidos - Administrador
+O sistema deverá gerar um relatório com os pedidos futuros a serem produzidos.
+
+RF13 - Visualizar cardápio - Usuário, cliente, administrador
+O sistema deverá exibir o cardápio da semana para usuários não autenticados.
+
+RF14 - Painel analítico - Administrador
+O sistema deverá exibir um painel analítico após o administrador realizar o login. Nele, poderá ser visualizado um gráfico de vendas (quanto entrou vs quanto saiu), tabela de próximos pedidos, gráfico de produtos com mais saída e produtos que estão com baixo estoque.
+

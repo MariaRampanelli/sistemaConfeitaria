@@ -23,3 +23,15 @@ Ao questionar Lilian pelas funcionalidades desejadas no novo sistema, a dona da 
 - Métricas como quantidade vendida de cada doce.
 - Informações prioritárias: estoque, pedidos e reservas.
 - Relatório de gastos e de estoque, no qual é possível lançar produtos utilizados na produção e realizado o cálculo de quantos e quais produtos restam.
+
+  ## Rodando o projeto
+  Certifique-se que possui o Node.js instalado.
+  Na pasta do projeto rode os comandos abaixo na ordem:
+  
+  ```bash
+  npm init -y
+  npm install express
+  npm start
+  
+  Como o sistema rodará na porta 3000, acesse no navegador http://localhost:3000
+  

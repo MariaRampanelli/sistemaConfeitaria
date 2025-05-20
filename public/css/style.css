@@ -1,0 +1,21 @@
+@import url('header.css');
+@import url('login.css');
+
+:root {
+    --branco-padrao: white;
+    --roxo-escuro: #AA60C8;
+    --roxo-claro: #D69ADE;
+    --rosa-claro: #EABDE6;
+    --preto: #2e2424;
+    --preto-fraco: #2C3333;
+    --cinza-claro: #F2F2F2; 
+}
+
+body {
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.destaque {
+    color: var(--preto);
+}

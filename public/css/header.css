@@ -2,7 +2,8 @@
     display: flex;
     justify-content: flex-start;
     padding-left: 1em;
-     background-color: var(--cinza-claro);
+    background-color: var(--cinza-claro);
+    border-bottom: 2px solid var(--cinza-medio);
 }
 
 .img-logo {

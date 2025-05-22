@@ -1,5 +1,6 @@
 @import url('header.css');
 @import url('login.css');
+@import url('side-bar.css');
 
 :root {
     --branco-padrao: white;
@@ -8,7 +9,8 @@
     --rosa-claro: #EABDE6;
     --preto: #2e2424;
     --preto-fraco: #2C3333;
-    --cinza-claro: #F2F2F2; 
+    --cinza-claro: #F2F2F2;
+    --cinza-medio: rgb(221, 207, 207);
 }
 
 body {

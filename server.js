@@ -13,6 +13,8 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 const indexRouter = require('./rotas/rotas.js');
 app.use('/', indexRouter);
 
+app.use(express.static('public'));
+
 app.listen(3000, () => {
   console.log('Servidor rodando em http://localhost:3000');
 });

@@ -15,4 +15,8 @@ router.get('/footer', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'footer.html'))
 })
 
+router.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'login.html'));
+});
+
 module.exports = router;

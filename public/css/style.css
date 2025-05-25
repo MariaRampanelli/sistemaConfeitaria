@@ -1,0 +1,48 @@
+@import url('header.css');
+@import url('login.css');
+@import url('side-bar.css');
+@import url('produtos.css');
+
+:root {
+    --branco-padrao: white;
+    --roxo-escuro: #AA60C8;
+    --roxo-claro: #D69ADE;
+    --rosa-claro: #EABDE6;
+    --preto: #2e2424;
+    --preto-fraco: #2C3333;
+    --cinza-claro: #F2F2F2;
+    --cinza-medio: rgb(221, 207, 207);
+}
+
+body {
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.destaque {
+    color: var(--preto);
+}
+
+.is-flex {
+    display: flex;
+}
+
+.table tr:nth-child(odd) {
+    background-color: var(--roxo-claro);
+}
+
+.buttons-form {
+    padding: 1em 0 1.2em 0.8em;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.button-form {
+    font-size: 1.25rem;
+    border-radius: 8px;
+    border-style: 2px solid var(--rosa-claro);
+    background-color: var(--roxo-claro);
+    color: var(--preto);
+    padding: 0.6em 1.3em 0.6em 1.3em;
+}

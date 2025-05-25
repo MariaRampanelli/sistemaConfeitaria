@@ -12,7 +12,19 @@ router.get('/header', (req, res) => {
 })
 
 router.get('/footer', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views', 'footer.html'))
+    res.sendFile(path.join(__dirname, '..', 'views', 'footer.html'));
+})
+
+router.get('/menu-lateral', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'menu-lateral.html'));
+})
+
+router.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'login.html'));
+});
+
+router.get('/produtos', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'produtos.html'));
 })
 
 router.get('/login', (req, res) => {

@@ -17,7 +17,7 @@ router.get('/footer', (req, res) => {
 
 router.get('/menu-lateral', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'menu-lateral.html'));
-})
+});
 
 router.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'login.html'));

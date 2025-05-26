@@ -1,80 +1,70 @@
+:root {
+  --roxo-escuro: #9b59b6;
+  --roxo-claro: #bb8fce;
+  --branco-padrao: #ffffff;
+}
+
 .cadastro-body {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    background-image: url('../images/fundo_login.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 
-  }
+  background-image: url('../images/fundo_login.jpg'); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
 
-  .cadastro-section {
-    background-color: var(--roxo-escuro);
-    width: 400px;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    color: var(--branco-padrao);
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
+.cadastro-section {
+  background-color: var(--roxo-escuro);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  color: var(--branco-padrao);
+  width: 100%;
+  max-width: 400px;
 
-  .logo {
-    width: 100px;
-    height: 100px;
-    background-color: var(--branco-padrao);
-    border-radius: 50%;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .form {
-    width: 100%;
-    max-width: 280px;
-    display: flex;
-    flex-direction: column;
-  }
+.cadastro-logo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
 
-  label {
-    margin: 10px 0 5px;
-    font-size: 14px;
-  }
+label {
+  align-self: flex-start;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
 
-  input {
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    outline: none;
-  }
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--branco-padrao);
+}
 
-  input[type="email"],
-  input[type="password"]
-  input[type="name"] {
-    background-color: var(--branco-padrao);
-  }
+.cadastro-button {
+  margin-top: 20px;
+  padding: 12px;
+  width: 100%;
+  background-color: var(--roxo-claro);
+  color: var(--branco-padrao);
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  .cadastro-button {
-    margin-top: 20px;
-    padding: 12px;
-    background-color: var(--roxo-claro);
-    color: var(--branco-padrao);
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .cadastro-button:hover {
-    background-color: var(--rosa-claro);
-  }
+.cadastro-button:hover {
+  background-color: #d2b4de; 
+}

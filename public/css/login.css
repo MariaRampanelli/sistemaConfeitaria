@@ -77,3 +77,10 @@
   .login-button:hover {
     background-color: var(--rosa-claro);
   }
+
+  :root {
+  --roxo-escuro: #AA60C8;
+  --roxo-claro: #D69ADE;
+  --rosa-claro: #EABDE6;
+  --branco-padrao: #FFFFFF;
+}

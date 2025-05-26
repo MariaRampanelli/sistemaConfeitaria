@@ -16,10 +16,12 @@ async function inserirHtml(id, arquivo) {
     }
 }
 
+function openForm(url) {
+    window.location.href = 'http://localhost:3000/' + url;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     inserirHtml('header', 'header');
     inserirHtml('footer', 'footer');
     inserirHtml('side-menu', 'menu-lateral');
-    inserirHtml('login', 'login');
-
 })

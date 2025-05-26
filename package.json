@@ -11,5 +11,14 @@
   "license": "ISC",
   "dependencies": {
     "express": "^5.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MariaRampanelli/sistemaConfeitaria.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/MariaRampanelli/sistemaConfeitaria/issues"
+  },
+  "homepage": "https://github.com/MariaRampanelli/sistemaConfeitaria#readme"
 }

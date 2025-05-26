@@ -1,9 +1,3 @@
-:root {
-  --roxo-escuro: #9b59b6;
-  --roxo-claro: #bb8fce;
-  --branco-padrao: #ffffff;
-}
-
 .cadastro-body {
   margin: 0;
   display: flex;
@@ -37,13 +31,13 @@
   margin-bottom: 20px;
 }
 
-label {
+.label-cadastro {
   align-self: flex-start;
   margin-top: 10px;
   margin-bottom: 5px;
 }
 
-input {
+.input-cadastro {
   width: 100%;
   padding: 12px;
   margin-bottom: 10px;

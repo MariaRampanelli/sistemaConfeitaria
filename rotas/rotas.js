@@ -31,8 +31,8 @@ router.get('/produtos', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'produtos.html'));
 })
 
-router.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views', 'login.html'));
-});
+router.get('/novo-produto', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'produtos-form.html'))
+})
 
 module.exports = router;

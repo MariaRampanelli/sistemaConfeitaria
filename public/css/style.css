@@ -2,6 +2,8 @@
 @import url('login.css');
 @import url('side-bar.css');
 @import url('produtos.css');
+@import url('form.css');
+@import url('cadastro_usuario.css');
 
 :root {
     --branco-padrao: white;
@@ -12,6 +14,7 @@
     --preto-fraco: #2C3333;
     --cinza-claro: #F2F2F2;
     --cinza-medio: rgb(221, 207, 207);
+    --branco: #FBF8EF;
 }
 
 body {
@@ -27,6 +30,15 @@ body {
     display: flex;
 }
 
+.is-gap-3 {
+    gap: 3px;
+}
+
+.is-gap-15 {
+    gap: 15px;
+}
+
+/* ESTILO GERAL DE TABELAS E BOTÕES */
 .table tr:nth-child(odd) {
     background-color: var(--roxo-claro);
 }
@@ -43,6 +55,15 @@ body {
     border-radius: 8px;
     border-style: 2px solid var(--rosa-claro);
     background-color: var(--roxo-claro);
-    color: var(--preto);
+    color: var(--branco);
     padding: 0.6em 1.3em 0.6em 1.3em;
+}
+
+.button-form:hover {
+    color: var(--branco);
+    background-color: var(--roxo-escuro);
+}
+
+.coluna-tabela, .linha-tabela {
+    font-size: 1.15rem;
 }

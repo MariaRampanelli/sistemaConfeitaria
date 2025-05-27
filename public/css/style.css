@@ -1,9 +1,9 @@
 @import url('header.css');
 @import url('login.css');
 @import url('side-bar.css');
-@import url('produtos.css');
 @import url('form.css');
 @import url('cadastro_usuario.css');
+@import url('tabelas.css');
 
 :root {
     --branco-padrao: white;
@@ -36,34 +36,4 @@ body {
 
 .is-gap-15 {
     gap: 15px;
-}
-
-/* ESTILO GERAL DE TABELAS E BOTÕES */
-.table tr:nth-child(odd) {
-    background-color: var(--roxo-claro);
-}
-
-.buttons-form {
-    padding: 1em 0 1.2em 0.8em;
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-}
-
-.button-form {
-    font-size: 1.25rem;
-    border-radius: 8px;
-    border-style: 2px solid var(--rosa-claro);
-    background-color: var(--roxo-claro);
-    color: var(--branco);
-    padding: 0.6em 1.3em 0.6em 1.3em;
-}
-
-.button-form:hover {
-    color: var(--branco);
-    background-color: var(--roxo-escuro);
-}
-
-.coluna-tabela, .linha-tabela {
-    font-size: 1.15rem;
 }

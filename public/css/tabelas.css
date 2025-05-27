@@ -1,0 +1,54 @@
+/* ESTILO GERAL DE TABELAS E BOTÕES */
+.titulo-tabela {
+    color: var(--preto-fraco);
+    padding-bottom: 2em;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.table tr:nth-child(odd) {
+    background-color: var(--roxo-claro);
+}
+
+.buttons-form {
+    padding: 1em 0 1.2em 0.8em;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.button-form {
+    font-size: 1.25rem;
+    border-radius: 8px;
+    border-style: 2px solid var(--rosa-claro);
+    background-color: var(--roxo-claro);
+    color: var(--branco);
+    padding: 0.6em 1.3em 0.6em 1.3em;
+}
+
+.button-form:hover {
+    color: var(--branco);
+    background-color: var(--roxo-escuro);
+}
+
+.coluna-tabela, .linha-tabela {
+    font-size: 1.15rem;
+}
+
+.main-tabela {
+    padding: 3em 0 0 15em;
+}
+
+.container-tabela {
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5em 0 0 1.8em;
+}
+
+.div-img-cupcake {
+    justify-content: flex-end;
+}
+
+.img-tabela {
+    width: 100px;
+}

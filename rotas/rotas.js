@@ -43,4 +43,12 @@ router.get('/nova-encomenda', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'encomendas-form.html'));
 })
 
+router.get('/insumos', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'insumos.html'));
+})
+
+router.get('/novo-insumo', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'insumos-form.html'));
+})
+
 module.exports = router;

@@ -6,6 +6,9 @@ const app = express();
 // Permite usar json nas requisições
 app.use(express.json());
 
+// Para pegar os dados do formulário
+app.use(express.urlencoded({ extended: true }));
+
 // Servir scripts e assets estáticos
 app.use('/public', express.static(path.join(__dirname, 'public')));
 

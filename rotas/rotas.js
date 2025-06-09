@@ -32,7 +32,11 @@ router.get('/produtos', (req, res) => {
 })
 
 router.get('/novo-produto', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'produtos-form.html'));
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'novo', 'produtos-form.html'));
+})
+
+router.get('/editar-produto', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-produto.html'));
 })
 
 router.get('/encomendas', (req, res) => {
@@ -40,7 +44,11 @@ router.get('/encomendas', (req, res) => {
 })
 
 router.get('/nova-encomenda', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'encomendas-form.html'));
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'novo', 'encomendas-form.html'));
+})
+
+router.get('/editar-encomenda', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-encomenda.html'));
 })
 
 router.get('/insumos', (req, res) => {
@@ -48,7 +56,23 @@ router.get('/insumos', (req, res) => {
 })
 
 router.get('/novo-insumo', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'insumos-form.html'));
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'novo', 'insumos-form.html'));
+})
+
+router.get('/editar-insumo', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-insumo.html'));
+})
+
+router.get('/vendas', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'vendas.html'));
+})
+
+router.get('/nova-venda', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'novo', 'vendas-form.html'));
+})
+
+router.get('/editar-venda', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-venda.html'));
 })
 
 module.exports = router;

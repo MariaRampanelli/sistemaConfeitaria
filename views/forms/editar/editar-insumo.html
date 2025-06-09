@@ -1,0 +1,36 @@
+<div id="header"></div>
+<div id="side-menu"></div>
+<main class="main-form is-flex">
+    <div class="form-border">
+        <p class="titulo-form">Editar insumo</p>
+        <form id="insumos-form" action="">
+            <div class="form-group container-form">
+                <div class="is-flex container-label-input">
+                    <label for="nome-insumo" class="label-form">Nome</label>
+                    <input class="input-form form-control" type="text" id="nome-insumo" placeholder="Nome do insumo" required>
+                </div>
+
+                <div class="form-row is is-gap-15">
+                    <div class="is-flex container-label-input">
+                        <label for="valor" class="label-form">Valor</label>
+                        <input class="input-form form-control mascara-valor" type="text" name="valor" id="valor" placeholder="R$ 0,00" required>
+                    </div>
+
+                    <div class="is-flex container-label-input">
+                        <label for="quant" class="label-form">Quantidade</label>
+                        <input class="input-form form-control" type="number" name="quant" id="quant" min="0" placeholder="0" required>
+                    </div>
+                </div>
+
+                <div class="container-form-buttons is-flex is-gap-15">
+                    <button type="submit" class="btn btn-salvar btn-lg">Salvar</button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg btn-cancel" onclick="limparECancelarForm('insumos-form', 'insumos')">Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<div id="footer"></div>
+<script src="../public/scripts/mascaraMonetaria.js"></script>
+<script src="../../public/scripts/acoesForms.js"></script>
+<script src="../public/scripts/include.js" defer></script>

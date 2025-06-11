@@ -1,55 +1,74 @@
-<div id="header"></div>
-<div id="side-menu"></div>
-<main class="main-form is-flex">
-    <div class="form-border">
-        <p class="titulo-form">Nova venda</p>
-        <form id="vendas-form" action="">
-            <div class="form-group container-form">
-                <div class="form-row">
-                    <div class="is-flex container-label-input">
-                        <label for="data-venda" class="label-form">Data de venda</label>
-                        <input class="input-form form-control" type="date" id="data-venda" required>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lilian Sweets</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="div-nav-bar">
+            <img class="img-logo" src="../public/images/logo_lilian.png" alt="Logo da Lilian Sweets">
+            <p class="welcome-text">Bem-vinda <strong class="destaque">Lilian!</strong></p>
+        </div>
+    </nav>
+    <div id="side-menu"></div>
+    <main class="main-form is-flex">
+        <div class="form-border">
+            <p class="titulo-form">Nova venda</p>
+            <form id="vendas-form" action="">
+                <div class="form-group container-form">
+                    <div class="form-row">
+                        <div class="is-flex container-label-input">
+                            <label for="data-venda" class="label-form">Data de venda</label>
+                            <input class="input-form form-control" type="date" id="data-venda" required>
+                        </div>
+
+                        <div class="is-flex container-label-input">
+                            <label for="forma-pagamento" class="label-form">Forma de pagamento</label>
+                            <select class="form-select input-form form-control" name="forma-pagamento" id="forma-pagamento" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="pix">Pix</option>
+                                <option value="dinheiro">Dinheiro</option>
+                                <option value="credito">Cartão de crédito</option>
+                                <option value="debito">Cartão de débito</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="is-flex container-label-input">
-                        <label for="forma-pagamento" class="label-form">Forma de pagamento</label>
-                        <select class="form-select input-form form-control" name="forma-pagamento" id="forma-pagamento" required>
-                            <option value="" disabled selected>Selecione</option>
-                            <option value="pix">Pix</option>
-                            <option value="dinheiro">Dinheiro</option>
-                            <option value="credito">Cartão de crédito</option>
-                            <option value="debito">Cartão de débito</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="is-flex container-label-input">
-                    <!-- Depois fazer um select de acordo com os produtos do Banco -->
-                    <label for="produto" class="label-form">Produto</label>
-                    <input class="input-form form-control" type="text" name="produto" id="produto" placeholder="Produto" required>
-                </div>
-
-                <div class="form-row">
-                    <div class="is-flex container-label-input">
-                        <label for="valor" class="label-form">Valor</label>
-                        <input class="input-form form-control mascara-valor" type="text" name="valor" id="valor" placeholder="R$ 0,00" required>
+                        <!-- Depois fazer um select de acordo com os produtos do Banco -->
+                        <label for="produto" class="label-form">Produto</label>
+                        <input class="input-form form-control" type="text" name="produto" id="produto" placeholder="Produto" required>
                     </div>
 
-                    <div class="is-flex container-label-input">
-                        <label for="quant" class="label-form">Quantidade</label>
-                        <input class="input-form form-control" type="number" name="quant" id="quant" min="0" placeholder="0" required>
+                    <div class="form-row">
+                        <div class="is-flex container-label-input">
+                            <label for="valor" class="label-form">Valor</label>
+                            <input class="input-form form-control mascara-valor" type="text" name="valor" id="valor" placeholder="R$ 0,00" required>
+                        </div>
+
+                        <div class="is-flex container-label-input">
+                            <label for="quant" class="label-form">Quantidade</label>
+                            <input class="input-form form-control" type="number" name="quant" id="quant" min="0" placeholder="0" required>
+                        </div>
+                    </div>
+
+                    <div class="container-form-buttons is-flex is-gap-15">
+                        <button type="submit" class="btn btn-salvar btn-lg">Salvar</button>
+                        <button type="button" class="btn btn-outline-secondary btn-lg btn-cancel" onclick="limparECancelarForm('vendas-form', 'vendas')">Cancelar</button>
                     </div>
                 </div>
-
-                <div class="container-form-buttons is-flex is-gap-15">
-                    <button type="submit" class="btn btn-salvar btn-lg">Salvar</button>
-                    <button type="button" class="btn btn-outline-secondary btn-lg btn-cancel" onclick="limparECancelarForm('vendas-form', 'vendas')">Cancelar</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</main>
-<div id="footer"></div>
+            </form>
+        </div>
+    </main>
+</body>
 <script src="../public/scripts/mascaraMonetaria.js"></script>
 <script src="../../public/scripts/acoesForms.js"></script>
 <script src="../public/scripts/include.js" defer></script>
+</html>

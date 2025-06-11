@@ -7,14 +7,6 @@ router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'index.html'));
 })
 
-router.get('/header', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views', 'header.html'));
-})
-
-router.get('/footer', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views', 'footer.html'));
-})
-
 router.get('/menu-lateral', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'menu-lateral.html'));
 });

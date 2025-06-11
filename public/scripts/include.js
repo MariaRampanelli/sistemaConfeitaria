@@ -21,7 +21,5 @@ function openForm(url) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    inserirHtml('header', 'header');
-    inserirHtml('footer', 'footer');
     inserirHtml('side-menu', 'menu-lateral');
 })

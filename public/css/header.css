@@ -4,6 +4,7 @@
     padding-left: 1em;
     background-color: var(--cinza-claro);
     border-bottom: 2px solid var(--cinza-medio);
+    width: 100%;
 }
 
 .img-logo {
@@ -14,4 +15,39 @@
     padding: 1.5em 0 0 0.3em;
     font-size: 1.5rem;
     color: var(--preto-fraco);
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+  padding: 0;
+}
+
+.menu-button img {
+  width: 30px;
+}
+
+.menu-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-bar {
+        left: 0;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .img-logo {
+        width: 100px;
+    }
+
+    .welcome-text {
+        font-size: 1.2rem;
+    }
 }

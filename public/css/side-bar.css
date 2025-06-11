@@ -45,3 +45,24 @@
         padding-right: 0;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .side-bar {
+        transform: translateX(-100%);
+    }
+
+    .side-bar.active {
+        transform: translateX(0);
+        width: 115px;
+        max-height: 100%;
+        padding-top: 25px;
+    }
+
+    .side-bar-link {
+        font-size: 1rem;
+    }
+
+    .side-bar-icon {
+        width: 18px;
+    }
+}

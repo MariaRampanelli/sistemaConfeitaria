@@ -66,10 +66,16 @@
         </a>
     </div>
 
-    <main></main>
+    <main>
+        <div class="dashboard-container w-50" style="margin-left: 25em;">
+            <canvas id="dashboard"></canvas>
+        </div>
+    </main>
 
 </body>
 <script src="/public/scripts/include.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("menu-button");
@@ -79,6 +85,28 @@
       sidebar.classList.toggle("active");
     });
   });
+
+  const ctx = document.getElementById('dashboard').getContext('2d');
+    const grafico = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Janeiro', 'Fevereiro', 'Março'],
+            datasets: [{
+                label: 'Vendas',
+                data: [12, 19, 3],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                fill: false
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 </script>
 
 </html>

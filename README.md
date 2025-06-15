@@ -39,9 +39,9 @@ Ao questionar Lilian pelas funcionalidades desejadas no novo sistema, a dona da 
 
  ## Requisitos Funcionais
 
- É possível encontrar a descrição dos requisitos funcionais na pasta do projeto identificado pelo arquivo requisitosFuncionais.
+ É possível encontrar a descrição dos requisitos funcionais na pasta do projeto, identificado pelo arquivo requisitosFuncionais.
 
  ## Modelo Conceitual
 
- É possível encontrar o modelo conceitual do Banco de Dados na pasta do projeto identificado pelo arquivo modelo-conceitual.png.
+ É possível encontrar o modelo conceitual do Banco de Dados na pasta do projeto, identificado pelo arquivo modelo-conceitual.png.
   

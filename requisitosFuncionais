@@ -2,17 +2,17 @@ REQUISITOS FUNCIONAIS
 
 ID - Requisito - Tipo de usuário - Descrição
 
-RF01 - Manter usuário - Administrador, cliente, usuário
+RF01 - Manter usuário - Administrador, usuário
 O sistema deverá permitir o cadastro de usuário no sistema informando nome, e-mail, senha e permissão.
 
 RF02 - Login - Administrador, cliente
-O sistema deverá permitir o login dos usuários mediante e-mail e senha.
+O sistema deverá permitir o login dos usuários mediante e-mail e senha, ou continuar sem login, para clientes.
 
 RF03 - Manter encomenda - Administrador
 O sistema deverá permitir o cadastro de encomendas. Toda encomenda possui o nome da pessoa que encomendou, o nome do produto, a data de entrega, o valor, a forma de pagamento e o tipo da entrega (retirada ou entrega).
 
 RF04 - Manter insumos - Administrador
-O sistema deverá permitir o cadastro de insumos. Todo insumo possui o nome do insumo, valor do insumo e quantidade.
+O sistema deverá permitir o cadastro de insumos. Todo insumo possui o nome do insumo, valor do insumo, quantidade, data da última compra.
 
 RF05 - Controlar estoque - Administrador
 O sistema deverá permitir a visualização dos produtos e dos insumos disponíveis no estoque. É possível editar a quantidade de um insumo do estoque. Deve permitir filtragem por categoria (produto/insumo) e por nome.

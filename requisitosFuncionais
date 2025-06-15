@@ -39,7 +39,7 @@ RF12 - Gerar relatório de pedidos - Administrador
 O sistema deverá gerar um relatório com os pedidos futuros a serem produzidos.
 
 RF13 - Visualizar cardápio - Usuário, cliente, administrador
-O sistema deverá exibir o cardápio da semana para usuários não autenticados.
+O sistema deverá exibir o cardápio da semana para usuários não autenticados, onde irão apenas visualizar os produtos disponíveis para venda.
 
 RF14 - Painel analítico - Administrador
 O sistema deverá exibir um painel analítico após o administrador realizar o login. Nele, poderá ser visualizado um gráfico de vendas (quanto entrou vs quanto saiu), tabela de próximos pedidos, gráfico de produtos com mais saída e produtos que estão com baixo estoque.

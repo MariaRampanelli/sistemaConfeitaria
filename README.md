@@ -36,4 +36,12 @@ Ao questionar Lilian pelas funcionalidades desejadas no novo sistema, a dona da 
   npm start
 ```
  Como o sistema rodará na porta 3000, acesse no navegador http://localhost:3000.
+
+ ## Requisitos Funcionais
+
+ É possível encontrar a descrição dos requisitos funcionais na pasta do projeto identificado pelo arquivo requisitosFuncionais.
+
+ ## Modelo Conceitual
+
+ É possível encontrar o modelo conceitual do Banco de Dados na pasta do projeto identificado pelo arquivo modelo-conceitual.png.
   

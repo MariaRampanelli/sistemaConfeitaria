@@ -3,7 +3,7 @@ REQUISITOS FUNCIONAIS
 ID - Requisito - Tipo de usuário - Descrição
 
 RF01 - Manter usuário - Administrador, usuário
-O sistema deverá permitir o cadastro de usuário no sistema informando nome, e-mail, senha e permissão.
+O sistema deverá permitir o cadastro de usuários que terão acesso ao sistema, informando nome, e-mail, senha e permissão.
 
 RF02 - Login - Administrador, cliente
 O sistema deverá permitir o login dos usuários mediante e-mail e senha, ou continuar sem login, para clientes.

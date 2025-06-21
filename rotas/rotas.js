@@ -43,6 +43,30 @@ router.get('/editar-encomenda', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-encomenda.html'));
 })
 
+router.get('/cardapio', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'cardapio.html'));
+})
+
+router.get('/novo-cardapio', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'novo', 'cardapio-form.html'));
+})
+
+router.get('/editar-cardapio', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-cardapio.html'));
+})
+
+router.get('/estoque', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'estoque.html'));
+})
+
+router.get('/novo-estoque', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'novo', 'estoque-form.html'));
+})
+
+router.get('/editar-estoque', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-estoque.html'));
+})
+
 router.get('/insumos', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'insumos.html'));
 })

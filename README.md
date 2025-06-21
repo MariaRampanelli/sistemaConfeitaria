@@ -39,7 +39,7 @@ Ao questionar Lilian pelas funcionalidades desejadas no novo sistema, a dona da 
 
  ## Requisitos Funcionais
 
- É possível encontrar a descrição dos requisitos funcionais na pasta do projeto, identificado pelo arquivo requisitosFuncionais.
+ É possível encontrar a descrição dos requisitos funcionais na pasta do projeto, identificado pelo arquivo requisitos_funcionais.pdf.
 
  ## Modelo Conceitual
 

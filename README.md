@@ -44,4 +44,8 @@ Ao questionar Lilian pelas funcionalidades desejadas no novo sistema, a dona da 
  ## Modelo Conceitual
 
  É possível encontrar o modelo conceitual do Banco de Dados na pasta do projeto, identificado pelo arquivo modelo-conceitual.png.
+
+ ## Modelo Lógico Relacional
+
+ É possível encontrar o modelo lógico do Banco de Dados na pasta do projeto, identificado pelo arquivo modelo-logico.png.
   

@@ -12,7 +12,8 @@
   "dependencies": {
     "chart": "^0.1.2",
     "express": "^5.1.0",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "pg-promise": "^11.14.0"
   },
   "repository": {
     "type": "git",

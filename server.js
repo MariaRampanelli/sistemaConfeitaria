@@ -27,7 +27,7 @@ app.listen(3000, () => {
 });
 
 // ----- Requisições para Produtos -----
-app.get("/produtos", async (req, res) => {
+app.get("/api/produtos", async (req, res) => {
   try {
     const produtos = await db.any("SELECT * FROM produto;");
     console.log("Produtos retornados");
@@ -38,7 +38,7 @@ app.get("/produtos", async (req, res) => {
   }
 });
 
-app.get("/produto", async (req, res) => {
+app.get("/api/produto", async (req, res) => {
   try {
     const produtoNome = (req.query.nome);
     const produtoDescr = (req.query.descr);

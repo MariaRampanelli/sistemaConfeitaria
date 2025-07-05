@@ -1,9 +1,11 @@
 .dashboard {
   margin-left: 350px; /* Largura da sidebar fixa */
-  padding: 20px;
+  padding: 150px;
+  padding-left: 20px;
+  padding-right: 20px;
+  min-height: 100vh;
   overflow-y: auto;
 }
-
 
 .dashboard h1 {
   font-size: 24px;
@@ -12,7 +14,7 @@
 }
 
 .cards {
-  flex: 1;
+  flex: 1 1;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
@@ -34,6 +36,15 @@
   
 }
 
+.card-grafico {
+  flex: 1 1 48px; 
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .value {
   font-size: 42px;
   color: #080104;
@@ -47,9 +58,9 @@
 
 .table-card th, .table-card td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 29px;
   text-align: center;
-  font-size: 14px;
+  font-size: 20px;
   color: #333
 }
 
@@ -60,12 +71,23 @@
 
 .top-section {
   display: flex;
-  flex-direction: row;
-  gap:  2rem;
+  gap: 10px;         /* Espaço pequeno entre os blocos */
+  align-items: flex-start; /* Alinha pelo topo */
+  width: 100%;
 }
 
-.chart-card img {
-  width: 100%;
-  height: auto;
-  margin-top: 10px;
+.graphic-section {
+  display: flex;
+  flex-wrap: nowrap;  
+  gap: 10px; 
+  justify-content: flex-start;       
+  width: 100%; 
 }
+
+.graphic-section .card-grafico {
+  flex: 1 1 0;   
+  max-width: none;
+  min-width: 0;  
+}
+
+

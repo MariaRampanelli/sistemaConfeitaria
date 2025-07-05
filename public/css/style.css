@@ -38,3 +38,8 @@ body {
 .is-gap-15 {
     gap: 15px;
 }
+
+#graficoPizza {
+    max-width: 450px;
+    max-height: 450px;
+}

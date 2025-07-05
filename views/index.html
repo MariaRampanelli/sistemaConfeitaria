@@ -81,7 +81,7 @@
     </div>
 
     <div class="table-card">
-      <h2>Insumos com baixo estoque</h2>
+      <h3>Insumos com baixo estoque</h3>
       <table>
         <thead>
           <tr>
@@ -103,7 +103,7 @@
     </div>
 
      <div class="table-card">
-      <h2>Próximos pedidos</h2>
+      <h3>Próximos pedidos</h3>
       <table>
         <thead>
           <tr>
@@ -127,43 +127,120 @@
       </table>
     </div>
   </div>
+
+<div class="graphic-section">
+  <div class="card card-grafico">
+    <h3>Gráfico de Vendas </h3>
+    <canvas id="graficoBarras"></canvas>
+  </div>
+
+  <div class="card card-grafico">
+    <h3>Gráfico de Vendas </h3>
+    <canvas id="graficoPizza"></canvas>
+  </div>
+</div>
 </main>  
 
 </body>
-<script src="/public/scripts/include.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("menu-button");
     const sidebar = document.querySelector(".side-bar");
-
     btn.addEventListener("click", () => {
       sidebar.classList.toggle("active");
     });
-  });
 
-  const ctx = document.getElementById('dashboard').getContext('2d');
-    const grafico = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Janeiro', 'Fevereiro', 'Março'],
-            datasets: [{
-                label: 'Vendas',
-                data: [12, 19, 3],
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1,
-                fill: false
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+    // GRÁFICO DE PIZZA
+    const ctxPizza = document.getElementById('graficoPizza').getContext('2d');
+
+    // Esses valores podem ser substituídos pelos que vierem do banco:
+    const labels = ['Produto A', 'Produto B', 'Produto C'];
+    const dataValues = [35, 25, 40];
+
+    const graficoPizza = new Chart(ctxPizza, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: dataValues,
+          backgroundColor: [
+            '#d63384', // rosa principal
+            '#ffafcc', // rosa claro
+            '#ffc8dd'  // rosa mais claro
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `${context.label}: ${context.parsed} vendas`;
+              }
             }
+          }
         }
+      }
     });
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const ctxBarras = document.getElementById('graficoBarras').getContext('2d');
+
+    const graficoBarras = new Chart(ctxBarras, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'],
+        datasets: [
+          {
+            label: 'Entrada',
+            data: [10000, 8000, 12000, 11000, 13000, 12500, 14000],
+            backgroundColor: '#e0dede' // cinza claro
+          },
+          {
+            label: 'Saída',
+            data: [7000, 5000, 10000, 9500, 11500, 11000, 12000],
+            backgroundColor: '#d63384' // rosa principal
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `${context.dataset.label}: R$ ${context.parsed.y.toLocaleString()}`;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function(value) {
+                return `R$ ${value.toLocaleString()}`;
+              }
+            }
+          }
+        }
+      }
+    });
+  });
 </script>
 
 </html>

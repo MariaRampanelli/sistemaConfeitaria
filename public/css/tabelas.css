@@ -36,7 +36,9 @@
 }
 
 .main-tabela {
-    padding: 3em 0 0 15em;
+  padding-top: 180px; /* empurra o conteúdo para baixo do header fixo */
+  padding-left: 15em; /* alinha com a sidebar à esquerda */
+  box-sizing: border-box;
 }
 
 .container-tabela {

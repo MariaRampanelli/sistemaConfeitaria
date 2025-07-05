@@ -1,11 +1,14 @@
 .side-bar {
-    background-color: var(--cinza-claro);
-    height: 100%;
-    width: 350px;
-    position: fixed;
-    overflow-x: hidden; /* Não scrollar horizontalmente */
-    padding-top: 55px;
-    border-right: 2px solid var(--cinza-medio);
+  position: fixed;
+  top: 100px;
+  left: 0;
+  width: 350px;
+  height: calc(100vh - 55px);
+  background-color: var(--cinza-claro);
+  border-right: 2px solid var(--cinza-medio);
+  overflow-y: auto;
+  padding-top: 5em;
+  z-index: 1000;
 }
 
 .side-bar-link {

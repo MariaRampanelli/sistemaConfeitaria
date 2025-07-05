@@ -66,11 +66,68 @@
         </a>
     </div>
 
-    <main>
-        <div class="dashboard-container w-50" style="margin-left: 25em;">
-            <canvas id="dashboard"></canvas>
-        </div>
-    </main>
+<main class="dashboard">
+  <h1>Painel analítico</h1>
+  <div class="top-section">
+    <div class="cards">
+      <div class="card">
+        <h2>Total de entrada</h2>
+        <p class="value">R$ 25.000</p>
+      </div>
+      <div class="card">
+        <h2>Total de saída</h2>
+        <p class="value">R$ 15.000</p>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <h2>Insumos com baixo estoque</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Insumo</th>
+            <th>Quantidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Farinha</td>
+            <td>2 kg</td>
+          </tr>
+          <tr>
+            <td>Açúcar</td>
+            <td>1 kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+     <div class="table-card">
+      <h2>Próximos pedidos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Produto</th>
+            <th>Data de entrega</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ana</td>
+            <td>Bolo de chocolate</td>
+            <td>05/04/2025</td>
+          </tr>
+          <tr>
+            <td>Lucas</td>
+            <td>Torta de limão</td>
+            <td>25/08/2025</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>  
 
 </body>
 <script src="/public/scripts/include.js"></script>

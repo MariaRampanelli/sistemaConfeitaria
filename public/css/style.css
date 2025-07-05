@@ -4,6 +4,7 @@
 @import url('form.css');
 @import url('cadastro_usuario.css');
 @import url('tabelas.css');
+@import url('index.css');
 
 :root {
     --branco-padrao: white;

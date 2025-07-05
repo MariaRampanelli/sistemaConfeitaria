@@ -1,0 +1,71 @@
+.dashboard {
+  margin-left: 350px; /* Largura da sidebar fixa */
+  padding: 20px;
+  overflow-y: auto;
+}
+
+
+.dashboard h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #d63384; /* rosa principal */
+}
+
+.cards {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 400px; 
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+  font-size: 20px;
+  color: #d63384;
+  margin-bottom: 10px;
+  
+}
+
+.value {
+  font-size: 42px;
+  color: #080104;
+  font-weight: bold;
+}
+
+.table-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-card th, .table-card td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+  color: #333
+}
+
+.table-card th {
+  background-color: #f9e0ef;
+  color: #d63384;
+}
+
+.top-section {
+  display: flex;
+  flex-direction: row;
+  gap:  2rem;
+}
+
+.chart-card img {
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+}

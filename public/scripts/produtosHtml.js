@@ -5,6 +5,7 @@ axios.defaults.headers.common["Content-Type"] =
 document.addEventListener("DOMContentLoaded", () => {
     tabelaProdutos();
     novoProduto();
+    editarProduto();
 });
 
 function tabelaProdutos() {
@@ -45,7 +46,7 @@ function processaResultadoProduto(rows) {
         tabelaResultado += `<td class="linha-tabela">${formataData(rows[i].data_validade)}</td>`;
         tabelaResultado += `<td>
                                 <div class="is-flex is-gap-3">
-                                    <a href="#" class="btn btn-info btn-table" onclick="openForm('editar-produto')">Editar</a>
+                                    <a href="#" class="btn btn-info btn-table" onclick="abreEditarProduto('editar-produto', '${rows[i].nome}', '${rows[i].descr}')">Editar</a>
                                     <a href="#" class="btn btn-danger btn-table" onclick="deletarProduto('${rows[i].nome}', '${rows[i].descr}')">Deletar</a>
                                 </div>
                             </td> </tr>`;                  
@@ -81,13 +82,60 @@ function novoProduto() {
     });
 }
 
-function editarProduto() {
+async function editarProduto() {
     const editarForm = document.getElementById('produtos-editar');
     if (!editarForm) {
         return;
     }
 
-    
+    const params = new URLSearchParams(window.location.search);
+    const nome = params.get('nome');
+    const descr = params.get('descr');
+
+    // Primeiro pega os dados daquele produto
+    try {
+        const response = await axios.get('/api/produto', {
+            params: {nome, descr}
+        });
+
+        const produto = response.data;
+        console.log(produto)
+
+        document.getElementById('nome-produto-edit').value = produto.nome;
+        document.getElementById('data-produto-edit').value = produto.data_validade.split('T')[0];
+        document.getElementById('descr-edit').value = produto.descr;
+        document.getElementById('valor-edit').value = 'R$' + produto.valor.replace('.', ',');
+        document.getElementById('quant-edit').value = produto.quant_produzida;
+
+        editarForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const nomeEdit = document.getElementById('nome-produto-edit').value;
+            const descrEdit = document.getElementById('descr-edit').value;
+            const valorStringEdit = document.getElementById('valor-edit').value.replace('R$', '').replace(',', '.');
+            const valorEdit = parseFloat(valorStringEdit);
+            const quantEdit = document.getElementById('quant-edit').value;
+            const data_validadeEdit = document.getElementById('data-produto-edit').value;
+
+            try {
+                await axios.put('/api/produto', {
+                    nome: nomeEdit,
+                    descr: descrEdit,
+                    valor: valorEdit,
+                    quant: quantEdit,
+                    data_validade: data_validadeEdit
+                });
+
+                console.log('Produto editado com sucesso!');
+                window.location.href = '/produtos';
+            } catch (error) {
+                console.log('Erro ao editar produto:', error);
+            }
+
+        })
+    } catch (error) {
+        console.log('Ocorreu um erro ao editar o produto: ', error);
+    }
 }
 
 async function deletarProduto(nome, descr) {

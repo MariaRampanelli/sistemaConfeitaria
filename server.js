@@ -106,3 +106,50 @@ app.delete("/api/produto", async (req, res) => {
     res.sendStatus(400).json({error: error.message});
   }
 });
+
+// ----- Requisições para Vendas -----
+
+// ----- Requisições para Insumos -----
+app.get("/api/insumos", async (req, res) => {
+  try {
+    const produtos = await db.any("SELECT * FROM insumo;");
+    console.log("Insumos retornados");
+    res.json(produtos).status(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
+app.get("/api/insumo", async (req, res) => {
+  try {
+    const nomeInsumo = req.query.nome;
+    const insumo = await db.one("SELECT * FROM produto WHERE nome = $1;",
+      [nomeInsumo]
+    );
+    res.json(insumo).status(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
+app.post("/api/insumo", async (req, res) => {
+  try {
+    const nome = req.body.nome;
+    const valor = req.body.valor;
+    const quant = req.body.quant;
+    const dataCompra = req.body.dataCompra;
+
+    const novoInsumo = await db.one(
+      "INSERT INTO insumo(nome,valor,quant,data_compra) VALUES ($1, $2, $3, $4) RETURNING *;",
+      [nome, valor, quant, dataCompra]
+    );
+
+    console.log(`Produto ${novoInsumo.nome} criado!`);
+    res.sendStatus(200).json(novoInsumo);
+  } catch(error) {
+    console.log(error);
+    res.sendStatus(400).json({error: error.message});
+  }
+});

@@ -35,11 +35,6 @@
             Produtos
         </a>
 
-        <a href="/encomendas" class="side-bar-link">
-            <img class="side-bar-icon" src="../public/images/icons/box2-heart.svg" alt="Ícone de uma caixa com um coração">
-            Encomendas
-        </a>
-
         <a href="/insumos" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/minecart.svg" alt="Ícone de um carrinho">
             Insumos
@@ -70,23 +65,28 @@
     <main class="main-form is-flex">
         <div class="form-border">
             <p class="titulo-form">Novo insumo</p>
-            <form id="insumos-form" action="">
+            <form id="insumos-form">
                 <div class="form-group container-form">
                     <div class="is-flex container-label-input">
                         <label for="nome-insumo" class="label-form">Nome</label>
-                        <input class="input-form form-control" type="text" id="nome-insumo" placeholder="Nome do insumo" required>
+                        <input class="input-form form-control" type="text" name="nome-insumo" id="nome-insumo" placeholder="Nome do insumo" required>
                     </div>
 
                     <div class="form-row is is-gap-15">
                         <div class="is-flex container-label-input">
                             <label for="valor" class="label-form">Valor</label>
-                            <input class="input-form form-control mascara-valor" type="text" name="valor" id="valor" placeholder="R$ 0,00" required>
+                            <input class="input-form form-control mascara-valor" type="text" name="valor-insumo" id="valor-insumo" placeholder="R$ 0,00" required>
                         </div>
 
                         <div class="is-flex container-label-input">
                             <label for="quant" class="label-form">Quantidade</label>
-                            <input class="input-form form-control" type="number" name="quant" id="quant" min="0" placeholder="0" required>
+                            <input class="input-form form-control" type="number" name="quant-insumo" id="quant-insumo" min="0" placeholder="0" required>
                         </div>
+                    </div>
+
+                    <div class="is-flex container-label-input">
+                        <label for="nome-insumo" class="label-form">Data de compra</label>
+                        <input class="input-form form-control" type="date" id="data-insumo" name="data-insumo" required>
                     </div>
 
                     <div class="container-form-buttons is-flex is-gap-15">
@@ -98,6 +98,8 @@
         </div>
     </main>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/public/scripts/insumosHtml.js"></script>
 <script src="../public/scripts/mascaraMonetaria.js"></script>
 <script src="../../public/scripts/acoesForms.js"></script>
 <script src="../public/scripts/include.js" defer></script>

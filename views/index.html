@@ -72,11 +72,11 @@
     <div class="cards">
       <div class="card">
         <h2>Total de entrada</h2>
-        <p class="value">R$ 25.000</p>
+        <p id="entrada-value" class="value">R$ ...</p>
       </div>
       <div class="card">
         <h2>Total de saída</h2>
-        <p class="value">R$ 15.000</p>
+        <p id="saida-value" class="value">R$ ...</p>
       </div>
     </div>
 
@@ -140,6 +140,34 @@
   </div>
 </div>
 </main>  
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    fetch("/api/entrada")
+      .then(res => res.json())
+      .then(data => {
+       const entradaCard = document.getElementById("entrada-value");
+        entradaCard.textContent = `R$ ${Number(data.entrada).toLocaleString("pt-BR", {
+          minimumFractionDigits: 2
+        })}`;
+      })
+      .catch(err => console.error("Erro ao buscar entrada:", err));
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    fetch("/api/saida")
+      .then(res => res.json())
+      .then(data => {
+        const saidaCard = document.getElementById("saida-value");
+        saidaCard.textContent = `R$ ${Number(data.saida).toLocaleString("pt-BR", {
+          minimumFractionDigits: 2
+        })}`;
+      })
+      .catch(err => console.error("Erro ao buscar saída:", err));
+  });
+</script>
 
 </body>
 

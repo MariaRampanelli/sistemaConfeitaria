@@ -52,3 +52,31 @@ app.get("/api/produto", async (req, res) => {
   }
 });
 
+app.get("/api/entrada", async (req, res) => {
+  try {
+    const result = await db.one(`
+      SELECT COALESCE(SUM(p.valor * p.quant_produzida), 0) AS total_entrada
+      FROM venda v
+      JOIN venda_produto vp ON v.ID_venda = vp.ID_venda
+      JOIN produto p ON vp.nome_produto = p.nome AND vp.descr_produto = p.descr;
+    `);
+    console.log("Entrada total retornada");
+    res.json({ entrada: result.total_entrada });
+  } catch (error) {
+    console.error("Erro ao calcular entrada:", error);
+    res.sendStatus(500);
+  }
+});
+
+app.get("/api/saida", async (req, res) => {
+  try {
+    const result = await db.one(`
+      SELECT COALESCE(SUM(valor), 0) AS total_saida
+      FROM despesa;
+    `);
+    res.json({ saida: result.total_saida });
+  } catch (error) {
+    console.error("Erro ao calcular saída:", error);
+    res.sendStatus(500);
+  }
+});

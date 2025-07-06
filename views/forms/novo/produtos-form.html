@@ -70,32 +70,32 @@
     <main class="main-form is-flex">
         <div class="form-border">
             <p class="titulo-form">Novo produto</p>
-            <form id="produtos-form" action="">
+            <form id="produtos-form">
                 <div class="form-group container-form">
                     <div class="is-flex container-label-input">
                         <label for="nome-produto" class="label-form">Nome</label>
-                        <input class="input-form form-control" type="text" id="nome-produto" placeholder="Nome do produto" required>
+                        <input class="input-form form-control" type="text" id="nome-produto" name="nome" placeholder="Nome do produto" required>
                     </div>
 
                     <div class="is-flex container-label-input">
                         <label for="data-produto" class="label-form">Data de validade</label>
-                        <input class="input-form form-control" type="date" id="data-produto" required>
+                        <input class="input-form form-control" type="date" id="data-produto" name="data_validade" required>
                     </div>
 
                     <div class="is-flex container-label-input">
                         <label for="descricao-produto" class="label-form">Descrição</label>
-                        <input class="input-form form-control" type="text" name="descricao-produto" id="descricao-produto" placeholder="Descrição do produto" maxlength="50" required>
+                        <input class="input-form form-control" type="text" name="descr" id="descr-produto" placeholder="Descrição do produto" maxlength="50" required>
                     </div>
 
                     <div class="form-row">
                         <div class="is-flex container-label-input">
                             <label for="valor" class="label-form">Valor</label>
-                            <input class="input-form form-control mascara-valor" type="text" name="valor" id="valor" placeholder="R$ 0,00" required>
+                            <input class="input-form form-control mascara-valor" type="text" name="valor" id="valor-produto" placeholder="R$ 0,00" required>
                         </div>
 
                         <div class="is-flex container-label-input">
                             <label for="quant" class="label-form">Quantidade</label>
-                            <input class="input-form form-control" type="number" name="qaunt" id="quant" min="0" placeholder="0" required>
+                            <input class="input-form form-control" type="number" name="quant" id="quant-produto" min="0" placeholder="0" required>
                         </div>
                     </div>
 
@@ -108,9 +108,11 @@
         </div>
     </main>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../public/scripts/mascaraMonetaria.js"></script>
 <script src="../../public/scripts/acoesForms.js"></script>
 <script src="../public/scripts/include.js" defer></script>
+<script src="/public/scripts/produtosHtml.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("menu-button");

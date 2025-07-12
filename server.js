@@ -108,6 +108,39 @@ app.delete("/api/produto", async (req, res) => {
 });
 
 // ----- Requisições para Vendas -----
+app.get('/api/vendas', async (req, res) => {
+  try {
+    const vendas = await db.any("SELECT * FROM venda;");
+    res.json(vendas).status(200);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(400);
+  }
+});
+
+app.get('/api/venda', async (req, res) => {
+  try {
+    const id = req.query.id;
+    
+    const venda = await db.one("SELECT * FROM venda WHERE id = $1;", [id]);
+    res.json(venda).status(200);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(400);
+  }
+});
+
+app.delete('/api/venda', async (req, res) => {
+  try {
+    const id = req.query.id;
+
+    await db.none("DELETE FROM venda WHERE id = $1;", [id]);
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: error.message });
+  }
+});
 
 // ----- Requisições para Insumos -----
 app.get("/api/insumos", async (req, res) => {

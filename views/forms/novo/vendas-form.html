@@ -92,7 +92,11 @@
                     <div class="is-flex container-label-input">
                         <!-- Depois fazer um select de acordo com os produtos do Banco -->
                         <label for="produto" class="label-form">Produto</label>
-                        <input class="input-form form-control" type="text" name="produto" id="produto" placeholder="Produto" required>
+                        <select class="input-form form-control" name="produto" id="produto" multiple  size="5" required>
+                            <option disabled>Selecione os produtos vendidos</option>
+                        </select>
+                             <small>Segure Ctrl (ou Cmd) para selecionar múltiplos produtos</small>
+
                     </div>
 
                     <div class="form-row">
@@ -129,4 +133,32 @@
     });
   });
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  preencherSelectProdutos();
+});
+
+function preencherSelectProdutos() {
+  fetch("/api/produtos")
+    .then((res) => {
+      if (!res.ok) throw new Error("Erro ao buscar produtos");
+      return res.json();
+    })
+    .then((produtos) => {
+      const select = document.getElementById("produto");
+
+      produtos.forEach((produto) => {
+        const option = document.createElement("option");
+        option.value = JSON.stringify({ nome: produto.nome, descr: produto.descr });
+        option.textContent = `${produto.nome} - ${produto.descr}`;
+        select.appendChild(option);
+      });
+    })
+    .catch((err) => {
+      console.error("Erro ao carregar produtos:", err);
+    });
+}
+</script>
+
 </html>

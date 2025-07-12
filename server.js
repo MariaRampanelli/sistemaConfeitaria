@@ -124,7 +124,7 @@ app.get("/api/insumos", async (req, res) => {
 app.get("/api/insumo", async (req, res) => {
   try {
     const nomeInsumo = req.query.nome;
-    const insumo = await db.one("SELECT * FROM produto WHERE nome = $1;",
+    const insumo = await db.one("SELECT * FROM insumo WHERE nome = $1;",
       [nomeInsumo]
     );
     res.json(insumo).status(200);
@@ -149,6 +149,38 @@ app.post("/api/insumo", async (req, res) => {
     console.log(`Produto ${novoInsumo.nome} criado!`);
     res.sendStatus(200).json(novoInsumo);
   } catch(error) {
+    console.log(error);
+    res.sendStatus(400).json({error: error.message});
+  }
+});
+
+app.put("/api/insumo", async (req, res) => {
+  try {
+    const nome = req.body.nome;
+    const valor = req.body.valor;
+    const quant = req.body.quant;
+    const data_compra = req.body.data_compra;
+
+    await db.none("UPDATE insumo SET nome = $1, valor = $2, quant = $3, data_compra = $4 WHERE nome = $1;",
+      [nome, valor, quant, data_compra]
+    );
+
+    console.log("Insumo alterado com sucesso");
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400).json({error: error.message});
+  }
+});
+
+app.delete("/api/insumo", async (req, res) => {
+  try {
+    const nome = req.query.nome;
+  
+    await db.none("DELETE FROM insumo WHERE nome = $1;", nome);
+    console.log("Insumo removido");
+    res.sendStatus(200);
+  } catch (error) {
     console.log(error);
     res.sendStatus(400).json({error: error.message});
   }

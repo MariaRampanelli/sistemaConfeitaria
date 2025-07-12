@@ -21,74 +21,86 @@ router.get('/login', (req, res) => {
 
 router.get('/produtos', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'produtos.html'));
-})
+});
 
 router.get('/novo-produto', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'novo', 'produtos-form.html'));
-})
+});
 
 router.get('/editar-produto', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-produto.html'));
-})
+});
 
 router.get('/encomendas', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'encomendas.html'));
-})
+});
 
 router.get('/nova-encomenda', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'novo', 'encomendas-form.html'));
-})
+});
 
 router.get('/editar-encomenda', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-encomenda.html'));
-})
+});
 
 router.get('/cardapio', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'cardapio.html'));
-})
+});
 
 router.get('/novo-cardapio', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'novo', 'cardapio-form.html'));
-})
+});
 
 router.get('/editar-cardapio', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-cardapio.html'));
-})
+});
 
 router.get('/estoque', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'estoque.html'));
-})
+});
 
 router.get('/novo-estoque', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'novo', 'estoque-form.html'));
-})
+});
 
 router.get('/editar-estoque', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-estoque.html'));
-})
+});
 
 router.get('/insumos', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'insumos.html'));
-})
+});
 
 router.get('/novo-insumo', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'novo', 'insumos-form.html'));
-})
+});
 
 router.get('/editar-insumo', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-insumo.html'));
-})
+});
 
 router.get('/vendas', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'vendas.html'));
-})
+});
 
 router.get('/nova-venda', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'novo', 'vendas-form.html'));
-})
+});
 
 router.get('/editar-venda', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-venda.html'));
-})
+});
+
+router.get('/despesas', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'despesa.html'));
+});
+
+router.get('/nova-despesa', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'novo', 'despesa-form.html'));
+});
+
+router.get('/editar-despesa',(req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'forms', 'editar', 'editar-despesa.html'));
+});
 
 module.exports = router;

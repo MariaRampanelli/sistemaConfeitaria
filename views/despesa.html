@@ -23,8 +23,8 @@
             <p class="welcome-text">Bem-vinda <strong class="destaque">Lilian!</strong></p>
         </div>
     </nav>
-    
-     <div class="side-bar">
+
+    <div class="side-bar">
         <a href="/" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/house.svg" alt="Ícone de uma casa">
             Início
@@ -34,7 +34,7 @@
             <img class="side-bar-icon" src="../public/images/icons/cake.svg" alt="Ícone de um bolo">
             Produtos
         </a>
-        
+
         <a href="/insumos" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/minecart.svg" alt="Ícone de um carrinho">
             Insumos
@@ -66,59 +66,60 @@
         </a>
     </div>
 
+    <main class="main-tabela">
+        <div class="container-tabela is-flex container">
+            <div class="titulo-tabela is-flex">
+                <h2>Despesas</h2>
 
-    <main class="main-form is-flex">
-        <div class="form-border">
-            <p class="titulo-form">Editar venda</p>
-            <form id="vendas-form" action="">
-                <div class="form-group container-form">
-                    <div class="form-row">
-                        <div class="is-flex container-label-input">
-                            <label for="data-venda" class="label-form">Data de venda</label>
-                            <input class="input-form form-control" type="date" id="data-venda" required>
-                        </div>
-
-                        <div class="is-flex container-label-input">
-                            <label for="forma-pagamento" class="label-form">Forma de pagamento</label>
-                            <select class="form-select input-form form-control" name="forma-pagamento" id="forma-pagamento" required>
-                                <option value="" disabled selected>Selecione</option>
-                                <option value="pix">Pix</option>
-                                <option value="dinheiro">Dinheiro</option>
-                                <option value="credito">Cartão de crédito</option>
-                                <option value="debito">Cartão de débito</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="is-flex container-label-input">
-                        <!-- Depois fazer um select de acordo com os produtos do Banco -->
-                        <label for="produto" class="label-form">Produto</label>
-                        <input class="input-form form-control" type="text" name="produto" id="produto" placeholder="Produto" required>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="is-flex container-label-input">
-                            <label for="valor" class="label-form">Valor</label>
-                            <input class="input-form form-control mascara-valor" type="text" name="valor" id="valor" placeholder="R$ 0,00" required>
-                        </div>
-
-                        <div class="is-flex container-label-input">
-                            <label for="quant" class="label-form">Quantidade</label>
-                            <input class="input-form form-control" type="number" name="quant" id="quant" min="0" placeholder="0" required>
-                        </div>
-                    </div>
-
-                    <div class="container-form-buttons is-flex is-gap-15">
-                        <button type="submit" class="btn btn-salvar btn-lg">Salvar</button>
-                        <button type="button" class="btn btn-outline-secondary btn-lg btn-cancel" onclick="limparECancelarForm('vendas-form', 'vendas')">Cancelar</button>
-                    </div>
+                <div class="div-img-cupcake is-flex">
+                    <img class="img-tabela" src="../public/images/despesa.jpg" alt="Imagem de uma planta de moeda">
                 </div>
-            </form>
+            </div>
+
+            <div class="container is-flex buttons-form">
+                <div>
+                    <button type="button" class="btn button-form" onclick="openForm('novo-estoque')">Novo</button>
+                </div>
+
+                <div>
+                    <button type="button" class="btn button-form">Gerar relatório</button>
+                </div>
+
+                <div>
+                    <button type="button" class="btn button-form">Filtro</button>
+                </div>
+            </div>
+
+            <div class="tabela-produtos container" id="tabelaDespesas">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="coluna-tabela">Valor</th>
+                            <th scope="col" class="coluna-tabela">Forma pagamento</th>
+                            <th scope="col" class="coluna-tabela">Data pagamento</th>
+                            <th scope="col" class="coluna-tabela">Observação</th>
+                        </tr>
+                    </thead>
+                    <tbody scope="row">
+                        <tr>
+                            <td class="linha-tabela">R$ 38,90</td>
+                            <td class="linha-tabela">Pix</td>
+                            <td class="linha-tabela">20/06/2025</td>
+                            <td class="linha-tabela"></td>
+                            <td>
+                                <div class="is-flex is-gap-3">
+                                    <a href="#" class="btn btn-info btn-table" onclick="openForm('editar-despesa')">Editar</a>
+                                    <a href="#" class="btn btn-danger btn-table">Deletar</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 </body>
-<script src="../public/scripts/mascaraMonetaria.js"></script>
-<script src="../../public/scripts/acoesForms.js"></script>
+
 <script src="/public/scripts/include.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -130,4 +131,5 @@
     });
   });
 </script>
+
 </html>

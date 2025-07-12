@@ -24,7 +24,7 @@
         </div>
     </nav>
     
-     <div class="side-bar">
+    <div class="side-bar">
         <a href="/" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/house.svg" alt="Ícone de uma casa">
             Início
@@ -34,7 +34,7 @@
             <img class="side-bar-icon" src="../public/images/icons/cake.svg" alt="Ícone de um bolo">
             Produtos
         </a>
-        
+
         <a href="/insumos" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/minecart.svg" alt="Ícone de um carrinho">
             Insumos
@@ -66,21 +66,20 @@
         </a>
     </div>
 
-
     <main class="main-form is-flex">
         <div class="form-border">
-            <p class="titulo-form">Editar venda</p>
-            <form id="vendas-form" action="">
+            <p class="titulo-form">Nova despesa</p>
+            <form id="despesa-form">
                 <div class="form-group container-form">
-                    <div class="form-row">
+                    <div class="form-row is is-gap-15">
                         <div class="is-flex container-label-input">
-                            <label for="data-venda" class="label-form">Data de venda</label>
-                            <input class="input-form form-control" type="date" id="data-venda" required>
+                            <label for="valor" class="label-form">Valor</label>
+                            <input class="input-form form-control mascara-valor" type="text" name="valor-despesa" id="valor-despesa" placeholder="R$ 0,00" required>
                         </div>
 
                         <div class="is-flex container-label-input">
                             <label for="forma-pagamento" class="label-form">Forma de pagamento</label>
-                            <select class="form-select input-form form-control" name="forma-pagamento" id="forma-pagamento" required>
+                            <select class="form-select input-form form-control" name="forma-pagamento" id="forma-pagamento-despesa" required>
                                 <option value="" disabled selected>Selecione</option>
                                 <option value="pix">Pix</option>
                                 <option value="dinheiro">Dinheiro</option>
@@ -91,35 +90,29 @@
                     </div>
 
                     <div class="is-flex container-label-input">
-                        <!-- Depois fazer um select de acordo com os produtos do Banco -->
-                        <label for="produto" class="label-form">Produto</label>
-                        <input class="input-form form-control" type="text" name="produto" id="produto" placeholder="Produto" required>
+                        <label for="data-pagamento-despesa" class="label-form">Data de pagamento</label>
+                        <input class="input-form form-control" type="date" id="data-pagamento-despesa" name="data-pagamento-despesa" required>
                     </div>
 
-                    <div class="form-row">
-                        <div class="is-flex container-label-input">
-                            <label for="valor" class="label-form">Valor</label>
-                            <input class="input-form form-control mascara-valor" type="text" name="valor" id="valor" placeholder="R$ 0,00" required>
-                        </div>
-
-                        <div class="is-flex container-label-input">
-                            <label for="quant" class="label-form">Quantidade</label>
-                            <input class="input-form form-control" type="number" name="quant" id="quant" min="0" placeholder="0" required>
-                        </div>
+                    <div class="is-flex container-label-input">
+                        <label for="obs" class="label-form">Observação</label>
+                        <input class="input-form form-control" type="text" id="obs-despesa" name="obs-despesa">
                     </div>
 
                     <div class="container-form-buttons is-flex is-gap-15">
                         <button type="submit" class="btn btn-salvar btn-lg">Salvar</button>
-                        <button type="button" class="btn btn-outline-secondary btn-lg btn-cancel" onclick="limparECancelarForm('vendas-form', 'vendas')">Cancelar</button>
+                        <button type="button" class="btn btn-outline-secondary btn-lg btn-cancel" onclick="limparECancelarForm('despesa-form', 'despesas')">Cancelar</button>
                     </div>
                 </div>
             </form>
         </div>
     </main>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/public/scripts/insumosHtml.js"></script>
 <script src="../public/scripts/mascaraMonetaria.js"></script>
 <script src="../../public/scripts/acoesForms.js"></script>
-<script src="/public/scripts/include.js"></script>
+<script src="../public/scripts/include.js" defer></script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("menu-button");

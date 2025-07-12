@@ -35,11 +35,6 @@
             Produtos
         </a>
 
-        <a href="/encomendas" class="side-bar-link">
-            <img class="side-bar-icon" src="../public/images/icons/box2-heart.svg" alt="Ícone de uma caixa com um coração">
-            Encomendas
-        </a>
-
         <a href="/insumos" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/minecart.svg" alt="Ícone de um carrinho">
             Insumos
@@ -60,6 +55,11 @@
             Estoque
         </a>
 
+        <a href="/despesas" class="side-bar-link">
+            <img class="side-bar-icon" src="../public/images/icons/credit-card.svg" alt="Ícone de uma caixa de papelão">
+            Despesas
+        </a>
+
         <a href="/cadastro-usuario" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/person.svg" alt="Íconde de uma pessoa">
             Novo Usuário
@@ -69,47 +69,49 @@
     <main class="main-form is-flex">
         <div class="form-border">
             <p class="titulo-form">Editar produto</p>
-            <form id="produtos-form" action="">
+            <form id="produtos-editar">
                 <div class="form-group container-form">
                     <div class="is-flex container-label-input">
                         <label for="nome-produto" class="label-form">Nome</label>
-                        <input class="input-form form-control" type="text" id="nome-produto" placeholder="Nome do produto" required>
+                        <input class="input-form form-control" type="text" id="nome-produto-edit" name="nome" placeholder="Nome do produto" required>
                     </div>
 
                     <div class="is-flex container-label-input">
                         <label for="data-produto" class="label-form">Data de validade</label>
-                        <input class="input-form form-control" type="date" id="data-produto" required>
+                        <input class="input-form form-control" type="date" id="data-produto-edit" name="data_validade" required>
                     </div>
 
                     <div class="is-flex container-label-input">
                         <label for="descricao-produto" class="label-form">Descrição</label>
-                        <input class="input-form form-control" type="text" name="descricao-produto" id="descricao-produto" placeholder="Descrição do produto" maxlength="50" required>
+                        <input class="input-form form-control" type="text" name="descr" id="descr-edit" placeholder="Descrição do produto" maxlength="50" required>
                     </div>
 
                     <div class="form-row">
                         <div class="is-flex container-label-input">
                             <label for="valor" class="label-form">Valor</label>
-                            <input class="input-form form-control mascara-valor" type="text" name="valor" id="valor" placeholder="R$ 0,00" required>
+                            <input class="input-form form-control mascara-valor" type="text" name="valor" id="valor-edit" placeholder="R$ 0,00" required>
                         </div>
 
                         <div class="is-flex container-label-input">
                             <label for="quant" class="label-form">Quantidade</label>
-                            <input class="input-form form-control" type="number" name="qaunt" id="quant" min="0" placeholder="0" required>
+                            <input class="input-form form-control" type="number" name="quant" id="quant-edit" min="0" placeholder="0" required>
                         </div>
                     </div>
 
                     <div class="container-form-buttons is-flex is-gap-15">
                         <button type="submit" class="btn btn-salvar btn-lg">Salvar</button>
-                        <button type="button" class="btn btn-outline-secondary btn-lg btn-cancel" onclick="limparECancelarForm('produtos-form', 'produtos')">Cancelar</button>
+                        <button type="button" class="btn btn-outline-secondary btn-lg btn-cancel" onclick="limparECancelarForm('produtos-editar', 'produtos')">Cancelar</button>
                     </div>
                 </div>
             </form>
         </div>
     </main>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../public/scripts/mascaraMonetaria.js"></script>
 <script src="../../public/scripts/acoesForms.js"></script>
 <script src="/public/scripts/include.js"></script>
+<script src="/public/scripts/produtosHtml.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("menu-button");

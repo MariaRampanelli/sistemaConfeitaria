@@ -35,11 +35,6 @@
             Produtos
         </a>
 
-        <a href="/encomendas" class="side-bar-link">
-            <img class="side-bar-icon" src="../public/images/icons/box2-heart.svg" alt="Ícone de uma caixa com um coração">
-            Encomendas
-        </a>
-
         <a href="/insumos" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/minecart.svg" alt="Ícone de um carrinho">
             Insumos
@@ -60,6 +55,11 @@
             Estoque
         </a>
 
+        <a href="/despesas" class="side-bar-link">
+            <img class="side-bar-icon" src="../public/images/icons/credit-card.svg" alt="Ícone de uma caixa de papelão">
+            Despesas
+        </a>
+
         <a href="/cadastro-usuario" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/person.svg" alt="Íconde de uma pessoa">
             Novo Usuário
@@ -70,37 +70,45 @@
     <main class="main-form is-flex">
         <div class="form-border">
             <p class="titulo-form">Editar insumo</p>
-            <form id="insumos-form" action="">
+            <form id="insumos-editar">
                 <div class="form-group container-form">
                     <div class="is-flex container-label-input">
-                        <label for="nome-insumo" class="label-form">Nome</label>
-                        <input class="input-form form-control" type="text" id="nome-insumo" placeholder="Nome do insumo" required>
+                        <label for="nome-insumo-edit" class="label-form">Nome</label>
+                        <input class="input-form form-control" type="text" id="nome-insumo-edit" placeholder="Nome do insumo" required>
                     </div>
 
                     <div class="form-row is is-gap-15">
                         <div class="is-flex container-label-input">
-                            <label for="valor" class="label-form">Valor</label>
-                            <input class="input-form form-control mascara-valor" type="text" name="valor" id="valor" placeholder="R$ 0,00" required>
+                            <label for="valor-insumo-edit" class="label-form">Valor</label>
+                            <input class="input-form form-control mascara-valor" type="text" name="valor" id="valor-insumo-edit" placeholder="R$ 0,00" required>
                         </div>
 
                         <div class="is-flex container-label-input">
-                            <label for="quant" class="label-form">Quantidade</label>
-                            <input class="input-form form-control" type="number" name="quant" id="quant" min="0" placeholder="0" required>
+                            <label for="quant-insumo-edit" class="label-form">Quantidade</label>
+                            <input class="input-form form-control" type="number" name="quant" id="quant-insumo-edit" min="0" placeholder="0" required>
                         </div>
+                    </div>
+
+                    <div class="is-flex container-label-input">
+                        <label for="data-insumo-edit" class="label-form">Data de compra</label>
+                        <input class="input-form form-control" type="date" id="data-insumo-edit" required>
                     </div>
 
                     <div class="container-form-buttons is-flex is-gap-15">
                         <button type="submit" class="btn btn-salvar btn-lg">Salvar</button>
-                        <button type="button" class="btn btn-outline-secondary btn-lg btn-cancel" onclick="limparECancelarForm('insumos-form', 'insumos')">Cancelar</button>
+                        <button type="button" class="btn btn-outline-secondary btn-lg btn-cancel" onclick="limparECancelarForm('insumos-editar', 'insumos')">Cancelar</button>
                     </div>
                 </div>
             </form>
         </div>
     </main>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/public/scripts/insumosHtml.js"></script>
 <script src="../public/scripts/mascaraMonetaria.js"></script>
 <script src="../../public/scripts/acoesForms.js"></script>
 <script src="/public/scripts/include.js"></script>
+<script></script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("menu-button");

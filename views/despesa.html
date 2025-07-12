@@ -35,11 +35,6 @@
             Produtos
         </a>
 
-        <a href="/encomendas" class="side-bar-link">
-            <img class="side-bar-icon" src="../public/images/icons/box2-heart.svg" alt="Ícone de uma caixa com um coração">
-            Encomendas
-        </a>
-
         <a href="/insumos" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/minecart.svg" alt="Ícone de um carrinho">
             Insumos
@@ -55,9 +50,14 @@
             Vendas
         </a>
 
-                <a href="/estoque" class="side-bar-link">
+        <a href="/estoque" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/box-seam.svg" alt="Ícone de uma caixa de papelão">
             Estoque
+        </a>
+
+        <a href="/despesas" class="side-bar-link">
+            <img class="side-bar-icon" src="../public/images/icons/credit-card.svg" alt="Ícone de uma caixa de papelão">
+            Despesas
         </a>
 
         <a href="/cadastro-usuario" class="side-bar-link">
@@ -65,50 +65,50 @@
             Novo Usuário
         </a>
     </div>
-    
+
     <main class="main-tabela">
         <div class="container-tabela is-flex container">
             <div class="titulo-tabela is-flex">
-                <h2>Encomendas</h2>
+                <h2>Despesas</h2>
 
                 <div class="div-img-cupcake is-flex">
-                    <img class="img-tabela" src="../public/images/bolo-com-velas.jpg" alt="Imagem de um cupcake roxo">
+                    <img class="img-tabela" src="../public/images/despesa.jpg" alt="Imagem de uma planta de moeda">
                 </div>
             </div>
 
             <div class="container is-flex buttons-form">
                 <div>
-                    <button type="button" class="btn button-form" onclick="openForm('nova-encomenda')">Novo</button>
+                    <button type="button" class="btn button-form" onclick="openForm('novo-estoque')">Novo</button>
                 </div>
 
                 <div>
                     <button type="button" class="btn button-form">Gerar relatório</button>
                 </div>
+
+                <div>
+                    <button type="button" class="btn button-form">Filtro</button>
+                </div>
             </div>
 
-            <div class="tabela-produtos container">
+            <div class="tabela-produtos container" id="tabelaDespesas">
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th scope="col" class="coluna-tabela">Pessoa que encomendou</th>
-                            <th scope="col" class="coluna-tabela">Nome do produto</th>
-                            <th scope="col" class="coluna-tabela">Data de entrega</th>
                             <th scope="col" class="coluna-tabela">Valor</th>
-                            <th scope="col" class="coluna-tabela">Forma de pagamento</th>
-                            <th scope="col" class="coluna-tabela">Tipo de entrega</th>
+                            <th scope="col" class="coluna-tabela">Forma pagamento</th>
+                            <th scope="col" class="coluna-tabela">Data pagamento</th>
+                            <th scope="col" class="coluna-tabela">Observação</th>
                         </tr>
                     </thead>
                     <tbody scope="row">
                         <tr>
-                            <td class="linha-tabela">Fernanda Batistelo</td>
-                            <td class="linha-tabela">Bolo de fubá</td>
-                            <td class="linha-tabela">08/06/2025</td>
                             <td class="linha-tabela">R$ 38,90</td>
                             <td class="linha-tabela">Pix</td>
-                            <td class="linha-tabela"> Retirada</td>
+                            <td class="linha-tabela">20/06/2025</td>
+                            <td class="linha-tabela"></td>
                             <td>
                                 <div class="is-flex is-gap-3">
-                                    <a href="#" class="btn btn-info btn-table" onclick="openForm('editar-encomenda')">Editar</a>
+                                    <a href="#" class="btn btn-info btn-table" onclick="openForm('editar-despesa')">Editar</a>
                                     <a href="#" class="btn btn-danger btn-table">Deletar</a>
                                 </div>
                             </td>

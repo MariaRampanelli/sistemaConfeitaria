@@ -52,31 +52,169 @@ app.get("/api/produto", async (req, res) => {
   }
 });
 
-app.get("/api/entrada", async (req, res) => {
+app.post("/api/produto", async (req, res) => {
   try {
-    const result = await db.one(`
-      SELECT COALESCE(SUM(p.valor * p.quant_produzida), 0) AS total_entrada
-      FROM venda v
-      JOIN venda_produto vp ON v.ID_venda = vp.ID_venda
-      JOIN produto p ON vp.nome_produto = p.nome AND vp.descr_produto = p.descr;
-    `);
-    console.log("Entrada total retornada");
-    res.json({ entrada: result.total_entrada });
-  } catch (error) {
-    console.error("Erro ao calcular entrada:", error);
-    res.sendStatus(500);
+    const nome = req.body.nome;
+    const descr = req.body.descr;
+    const data_validade = req.body.data_validade;
+    const valor = req.body.valor;
+    const quant = req.body.quant;
+
+    const novoProduto = await db.one(
+      "INSERT INTO produto(nome,descr,valor,quant_produzida,data_validade) VALUES ($1, $2, $3, $4, $5) RETURNING *;",
+      [nome, descr, valor, quant, data_validade]
+    );
+
+    console.log(`Produto ${novoProduto.descr} criado!`);
+    res.sendStatus(200).json(novoProduto);
+  } catch(error) {
+    console.log(error);
+    res.sendStatus(400).json({error: error.message});
   }
 });
 
-app.get("/api/saida", async (req, res) => {
+app.put("/api/produto", async (req, res) => {
   try {
-    const result = await db.one(`
-      SELECT COALESCE(SUM(valor), 0) AS total_saida
-      FROM despesa;
-    `);
-    res.json({ saida: result.total_saida });
+    const nome = req.body.nome;
+    const descr = req.body.descr;
+    const data_validade = req.body.data_validade;
+    const valor = req.body.valor;
+    const quant = req.body.quant;
+
+    await db.none("UPDATE produto SET nome = $1, descr = $2, valor = $3, quant_produzida = $4, data_validade = $5 WHERE nome = $1 AND descr = $2;",
+      [nome, descr, valor, quant, data_validade]
+    );
+
+    console.log("Produto alterado com sucesso");
+    res.sendStatus(200);
   } catch (error) {
-    console.error("Erro ao calcular saída:", error);
-    res.sendStatus(500);
+    console.log(error);
+    res.sendStatus(400).json({error: error.message});
+  }
+});
+
+app.delete("/api/produto", async (req, res) => {
+  try {
+    const nome = req.query.nome;
+    const descr = req.query.descr;
+
+    await db.none("DELETE FROM produto WHERE nome = $1 AND descr = $2;", [nome, descr]);
+    console.log("Produto removido");
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400).json({error: error.message});
+  }
+});
+
+// ----- Requisições para Vendas -----
+app.get('/api/vendas', async (req, res) => {
+  try {
+    const vendas = await db.any("SELECT * FROM venda;");
+    res.json(vendas).status(200);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(400);
+  }
+});
+
+app.get('/api/venda', async (req, res) => {
+  try {
+    const id = req.query.id;
+    
+    const venda = await db.one("SELECT * FROM venda WHERE id = $1;", [id]);
+    res.json(venda).status(200);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(400);
+  }
+});
+
+app.delete('/api/venda', async (req, res) => {
+  try {
+    const id = req.query.id;
+
+    await db.none("DELETE FROM venda WHERE id = $1;", [id]);
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// ----- Requisições para Insumos -----
+app.get("/api/insumos", async (req, res) => {
+  try {
+    const produtos = await db.any("SELECT * FROM insumo;");
+    console.log("Insumos retornados");
+    res.json(produtos).status(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
+app.get("/api/insumo", async (req, res) => {
+  try {
+    const nomeInsumo = req.query.nome;
+    const insumo = await db.one("SELECT * FROM insumo WHERE nome = $1;",
+      [nomeInsumo]
+    );
+    res.json(insumo).status(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
+app.post("/api/insumo", async (req, res) => {
+  try {
+    const nome = req.body.nome;
+    const valor = req.body.valor;
+    const quant = req.body.quant;
+    const dataCompra = req.body.dataCompra;
+
+    const novoInsumo = await db.one(
+      "INSERT INTO insumo(nome,valor,quant,data_compra) VALUES ($1, $2, $3, $4) RETURNING *;",
+      [nome, valor, quant, dataCompra]
+    );
+
+    console.log(`Produto ${novoInsumo.nome} criado!`);
+    res.sendStatus(200).json(novoInsumo);
+  } catch(error) {
+    console.log(error);
+    res.sendStatus(400).json({error: error.message});
+  }
+});
+
+app.put("/api/insumo", async (req, res) => {
+  try {
+    const nome = req.body.nome;
+    const valor = req.body.valor;
+    const quant = req.body.quant;
+    const data_compra = req.body.data_compra;
+
+    await db.none("UPDATE insumo SET nome = $1, valor = $2, quant = $3, data_compra = $4 WHERE nome = $1;",
+      [nome, valor, quant, data_compra]
+    );
+
+    console.log("Insumo alterado com sucesso");
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400).json({error: error.message});
+  }
+});
+
+app.delete("/api/insumo", async (req, res) => {
+  try {
+    const nome = req.query.nome;
+  
+    await db.none("DELETE FROM insumo WHERE nome = $1;", nome);
+    console.log("Insumo removido");
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400).json({error: error.message});
   }
 });

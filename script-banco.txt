@@ -1,0 +1,65 @@
+create table if not exists usuario (
+    ID_usuario SERIAL PRIMARY KEY,
+    nome VARCHAR (100) NOT NULL,
+    email VARCHAR (100) UNIQUE NOT NULL,
+    senha VARCHAR (20) NOT NULL,
+    permissao VARCHAR(20) NOT NULL
+);
+			 
+create table if not exists insumo (
+    nome VARCHAR(200) PRIMARY KEY,
+    valor NUMERIC (10,2) NOT NULL,
+    quant INTEGER NOT NULL,
+    data_compra DATE NOT NULL
+);
+
+CREATE TABLE if not exists despesa (
+    ID_despesa SERIAL PRIMARY KEY,
+    valor NUMERIC(10,2) NOT NULL,
+    forma_pagamento VARCHAR(25) NOT NULL,
+    data_pagamento DATE NOT NULL,
+    obs VARCHAR(255)
+);
+
+create table if not exists produto (
+    nome VARCHAR(100),
+    descr VARCHAR(255),
+    valor NUMERIC (10,2) NOT NULL,
+    quant_produzida INTEGER NOT NULL,
+    data_validade DATE NOT NULL,
+    PRIMARY KEY (nome, descr)
+);
+
+create table if not exists venda (
+    ID_venda SERIAL PRIMARY KEY,
+    nome_cliente VARCHAR (250) NOT NULL,
+    forma_pagamento VARCHAR(25) NOT NULL,
+    tipo_entrega VARCHAR(25) NOT NULL,
+    tipo_venda VARCHAR(50) NOT NULL,
+    data_entrega DATE NOT NULL
+);
+
+create table if not exists venda_produto (
+    ID_venda INT,
+    nome_produto VARCHAR(100),
+    descr_produto VARCHAR(255),
+    PRIMARY KEY (ID_venda, nome_produto, descr_produto),
+    FOREIGN KEY (ID_venda) REFERENCES venda(ID_venda),
+    FOREIGN KEY (nome_produto, descr_produto) REFERENCES produto(nome, descr)
+);
+
+create table if not exists cardapio (
+    data_ini DATE,
+    data_fin DATE,
+    PRIMARY KEY (data_ini, data_fin)
+);
+			 
+create table if not exists produto_cardapio (
+    nome_produto VARCHAR(200),
+    descr_produto VARCHAR(200),
+    data_ini DATE,
+    data_fin DATE,
+    PRIMARY KEY (nome_produto, descr_produto, data_ini, data_fin),
+    FOREIGN KEY (nome_produto, descr_produto) REFERENCES produto(nome, descr),
+    FOREIGN KEY (data_ini, data_fin) REFERENCES cardapio(data_ini, data_fin)
+);

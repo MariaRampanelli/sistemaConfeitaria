@@ -24,7 +24,7 @@
         </div>
     </nav>
     
-     <div class="side-bar">
+    <div class="side-bar">
         <a href="/" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/house.svg" alt="Ícone de uma casa">
             Início
@@ -33,11 +33,6 @@
         <a href="/produtos" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/cake.svg" alt="Ícone de um bolo">
             Produtos
-        </a>
-
-        <a href="/encomendas" class="side-bar-link">
-            <img class="side-bar-icon" src="../public/images/icons/box2-heart.svg" alt="Ícone de uma caixa com um coração">
-            Encomendas
         </a>
 
         <a href="/insumos" class="side-bar-link">
@@ -60,45 +55,31 @@
             Estoque
         </a>
 
+        <a href="/despesas" class="side-bar-link">
+            <img class="side-bar-icon" src="../public/images/icons/credit-card.svg" alt="Ícone de uma caixa de papelão">
+            Despesas
+        </a>
+
         <a href="/cadastro-usuario" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/person.svg" alt="Íconde de uma pessoa">
             Novo Usuário
         </a>
     </div>
 
-
     <main class="main-form is-flex">
         <div class="form-border">
-            <p class="titulo-form">Nova encomenda</p>
-            <form id="encomendas-form" action="">
+            <p class="titulo-form">Nova despesa</p>
+            <form id="despesa-form">
                 <div class="form-group container-form">
-                    <div class="is-flex container-label-input">
-                        <label for="nome-pessoa" class="label-form">Nome da pessoa</label>
-                        <input class="input-form form-control" type="text" id="nome-pessoa" placeholder="Nome da pessoa que encomendou" required>
-                    </div>
-
-                    <!-- Fazer um select para trazer os produtos cadastrados -->
-                    <div class="is-flex container-label-input">
-                        <label for="produto" class="label-form">Produto</label>
-                        <input class="input-form form-control" id="produto" placeholder="Produto" required>
-                    </div>
-
-                    <div class="form-row is-gap-15">
+                    <div class="form-row is is-gap-15">
                         <div class="is-flex container-label-input">
-                            <label for="data-entrega" class="label-form">Data de entrega</label>
-                            <input class="input-form form-control" type="date" name="data-entrega" id="data-entrega" required>
+                            <label for="valor" class="label-form">Valor</label>
+                            <input class="input-form form-control mascara-valor" type="text" name="valor-despesa" id="valor-despesa" placeholder="R$ 0,00" required>
                         </div>
 
-                        <div class="is-flex container-label-input">
-                            <label for="valor-entrega" class="label-form">Valor</label>
-                            <input class="input-form form-control mascara-valor" type="text" name="valor-entrega" id="valor-entrega" placeholder="R$ 0,00" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row is-gap-15">
                         <div class="is-flex container-label-input">
                             <label for="forma-pagamento" class="label-form">Forma de pagamento</label>
-                            <select class="form-select input-form form-control" name="forma-pagamento" id="forma-pagamento" required>
+                            <select class="form-select input-form form-control" name="forma-pagamento" id="forma-pagamento-despesa" required>
                                 <option value="" disabled selected>Selecione</option>
                                 <option value="pix">Pix</option>
                                 <option value="dinheiro">Dinheiro</option>
@@ -106,26 +87,29 @@
                                 <option value="debito">Cartão de débito</option>
                             </select>
                         </div>
+                    </div>
 
-                        <div class="is-flex container-label-input">
-                            <label for="tipo-entrega" class="label-form">Tipo de entraga</label>
-                            <select class="form-select input-form form-control" name="tipo-entrega" id="tipo-entrega" required>
-                                <option value="" disabled selected>Selecione</option>
-                                <option value="retirada">Retirada</option>
-                                <option value="entrega">Entrega</option>
-                            </select>
-                        </div>
+                    <div class="is-flex container-label-input">
+                        <label for="data-pagamento-despesa" class="label-form">Data de pagamento</label>
+                        <input class="input-form form-control" type="date" id="data-pagamento-despesa" name="data-pagamento-despesa" required>
+                    </div>
+
+                    <div class="is-flex container-label-input">
+                        <label for="obs" class="label-form">Observação</label>
+                        <input class="input-form form-control" type="text" id="obs-despesa" name="obs-despesa">
                     </div>
 
                     <div class="container-form-buttons is-flex is-gap-15">
                         <button type="submit" class="btn btn-salvar btn-lg">Salvar</button>
-                        <button type="button" class="btn btn-outline-secondary btn-lg btn-cancel" onclick="limparECancelarForm('encomendas-form', 'encomendas')">Cancelar</button>
+                        <button type="button" class="btn btn-outline-secondary btn-lg btn-cancel" onclick="limparECancelarForm('despesa-form', 'despesas')">Cancelar</button>
                     </div>
                 </div>
             </form>
         </div>
     </main>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/public/scripts/insumosHtml.js"></script>
 <script src="../public/scripts/mascaraMonetaria.js"></script>
 <script src="../../public/scripts/acoesForms.js"></script>
 <script src="../public/scripts/include.js" defer></script>

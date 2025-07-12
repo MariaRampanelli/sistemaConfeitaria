@@ -25,6 +25,18 @@ function processaResultadoProduto(rows) {
 
     tabelaProdutos.innerHTML = '';
 
+    if (rows.length == 0) {
+        const p = document.createElement('p');
+        p.textContent = 'Nenhum produto cadastrado. Mas assim que cadatrar um, ele aparecerá aqui!';
+        p.style.color = 'black';
+        p.classList.add('text-center', 'mt-3');
+        p.style.fontWeight = 'bold';
+        p.style.fontSize = '1.25rem';
+        document.body.appendChild(p); 
+        return;
+    }
+    
+
     let tabelaResultado = `
     <table class="table table-striped table-bordered table-hover">
         <thead>
@@ -74,9 +86,11 @@ function novoProduto() {
         try {
             await axios.post('/api/produto', {nome, descr, valor, quant, data_validade});
             console.log('Produto cadastrado com sucesso!');
+            alert('Produto cadastrado com sucesso!');
             formProduto.reset();
             window.location.href = 'http://localhost:3000/produtos';
         } catch (error) {
+            alert('Ocorreu um erro ao inserir o produto');
             console.log('Ocorreu um erro ao inserir um produto: ', error);
         }
     });
@@ -127,8 +141,10 @@ async function editarProduto() {
                 });
 
                 console.log('Produto editado com sucesso!');
+                alert('Produto editado com sucesso!');
                 window.location.href = '/produtos';
             } catch (error) {
+                alert('Ocorreu um erro ao editar o produto.');
                 console.log('Erro ao editar produto:', error);
             }
 
@@ -142,8 +158,10 @@ async function deletarProduto(nome, descr) {
     try {
         await axios.delete('/api/produto', {params: {nome, descr}});
         console.log('Produto deletado com sucesso!');
+        alert('Produto deletado com sucesso!');
         window.location.reload();
     } catch (error) {
+        alert('Ocorreu um erro ao deletar o produto');
         console.log('Ocorreu um erro ao deletar um produto: ', error);
     }
 }

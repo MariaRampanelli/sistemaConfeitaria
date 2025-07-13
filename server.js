@@ -10,6 +10,14 @@ const usuario = "postgres";
 const senha = "postgres";
 const db = pgp(`postgres://${usuario}:${senha}@localhost:5432/postgres`);
 
+/*const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;*/
+
 // Para pegar os dados do formulário
 app.use(express.urlencoded({ extended: true }));
 
@@ -25,6 +33,18 @@ app.use(express.static('public'));
 app.listen(3000, () => {
   console.log('Servidor rodando em http://localhost:3000');
 });
+
+// Sessão e Autenticação
+/*app.use(
+	session({
+		secret: 'frase_secreta_para_sistema_de_confeitaria_SECRET',
+		resave: false,
+		saveUninitialized: false,
+		cookie: { secure: true },
+	}),
+);
+app.use(passport.initialize());
+app.use(passport.session());*/
 
 // ----- Requisições para Produtos -----
 app.get("/api/produtos", async (req, res) => {

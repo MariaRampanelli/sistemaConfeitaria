@@ -142,6 +142,37 @@ app.delete('/api/venda', async (req, res) => {
   }
 });
 
+app.post("/api/verifica-cardapio", async (req, res) => {
+    const { produtos } = req.body;
+
+    try {
+        const hoje = new Date().toISOString().split("T")[0];
+
+        const resultados = [];
+
+        for (const p of produtos) {
+            const resultado = await db.oneOrNone(
+                `SELECT 1 FROM produto_cardapio 
+                 WHERE nome_produto = $1 AND descr_produto = $2 
+                 AND $3 BETWEEN data_ini AND data_fin`,
+                [p.nome, p.descr, hoje]
+            );
+
+            resultados.push({
+                ...p,
+                tipo: resultado ? "Cardápio" : "Encomenda"
+            });
+        }
+
+        res.json(resultados);
+    } catch (error) {
+        console.error("Erro ao verificar cardápio:", error);
+        res.status(500).json({ error: "Erro ao verificar cardápio" });
+    }
+});
+
+
+
 // ----- Requisições para Insumos -----
 app.get("/api/insumos", async (req, res) => {
   try {

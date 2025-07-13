@@ -110,10 +110,16 @@ app.delete("/api/produto", async (req, res) => {
 // ----- Requisições para Vendas -----
 app.get('/api/vendas', async (req, res) => {
   try {
-    const vendas = await db.any("SELECT * FROM venda;");
-    res.json(vendas).status(200);
+    const vendas = await db.any(`
+      SELECT v.nome_cliente, v.forma_pagamento, v.tipo_entrega, v.tipo_venda, v.data_entrega,
+             p.nome AS nome_produto, p.descr AS descr_produto, p.valor
+      FROM venda v
+      JOIN venda_produto vp ON v.id_venda = vp.id_venda
+      JOIN produto p ON vp.nome_produto = p.nome AND vp.descr_produto = p.descr
+    `);
+    res.status(200).json(vendas);
   } catch (error) {
-    console.error(error);
+    console.error('Erro ao buscar vendas:', error);
     res.sendStatus(400);
   }
 });

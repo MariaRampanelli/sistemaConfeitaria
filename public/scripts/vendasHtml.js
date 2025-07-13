@@ -7,10 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
     novoVendas();
     editarVendas();
     deletarVendas();
-    processaResultadoVendas();
 });
 
-function tabelaVendas() {
+async function tabelaVendas() {
     axios.get('/api/vendas')
     .then((response) => {
         processaResultadoVendas(response.data);
@@ -19,59 +18,59 @@ function tabelaVendas() {
     });
 }
 
-function processaResultadoVendas(rows) {
-    const tabelaVendas = document.getElementById('tabelaVendas');
+async function processaResultadoVendas(rows) {
+  const tabelaVendas = document.getElementById('tabelaVendas');
     if (!tabelaVendas) {
         return;
     }
 
-    tabelaVendas.innerHTML = '';
+  tabelaVendas.innerHTML = '';
 
-    if (rows.length == 0) {
-        const p = document.createElement('p');
-        p.textContent = 'Nenhuma venda cadastrada. Mas assim que cadatrar um, ele aparecerá aqui!';
-        p.style.color = 'black';
-        p.classList.add('text-center', 'mt-3');
-        p.style.fontWeight = 'bold';
-        p.style.fontSize = '1.25rem';
-        document.body.appendChild(p); 
-        return;
-    }
-    
+  if (rows.length === 0) {
+    const p = document.createElement('p');
+    p.textContent = 'Nenhuma venda cadastrada. Mas assim que cadastrar uma, ela aparecerá aqui!';
+    p.style.color = 'black';
+    p.classList.add('text-center', 'mt-3');
+    p.style.fontWeight = 'bold';
+    p.style.fontSize = '1.25rem';
+    tabelaVendas.appendChild(p);
+    return;
+  }
 
-    let tabelaResultado = `
+  let tabelaResultado = `
     <table class="table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
-                <th scope="col" class="coluna-tabela">Nome do cliente</th>
-                <th scope="col" class="coluna-tabela">Forma de pagamento</th>
-                <th scope="col" class="coluna-tabela">Tipo de entrega</th>
-                <th scope="col" class="coluna-tabela">Tipo de venda</th>
-                <th scope="col" class="coluna-tabela">Produto</th>
-                <th scope="col" class="coluna-tabela">Valor</th>
-            </tr>
-        </thead>
-        <tbody scope="row">`;
+      <thead>
+        <tr>
+          <th>Nome do cliente</th>
+          <th>Forma de pagamento</th>
+          <th>Tipo de entrega</th>
+          <th>Tipo de venda</th>
+          <th>Produto</th>
+          <th>Valor</th>
+          <th>Data entrega</th>
+        </tr>
+      </thead>
+      <tbody>`;
 
-    for (let i = 0; i < rows.length; i++) {
-        tabelaResultado += `<tr> <td class="linha-tabela">${rows[i].nome_cliente}</td>`;
-        tabelaResultado += `<td class="linha-tabela">${rows[i].forma_pagamento}</td>`;
-        tabelaResultado += `<td class="linha-tabela">R$ ${rows[i].valor.replace('.', ',')}</td>`;
-        tabelaResultado += `<td class="linha-tabela">${rows[i].tipo_entrega}</td>`;
-        tabelaResultado += `<td class="linha-tabela">${rows[i].tipo_venda}</td>`;
-        tabelaResultado += `<td class="linha-tabela">${formataData(rows[i].data_entrega)}</td>`;
-        tabelaResultado += `<td>
-                                <div class="is-flex is-gap-3">
-                                    <a href="#" class="btn btn-info btn-table" onclick="abreEditarProduto('editar-produto', '${rows[i].nome}', '${rows[i].descr}')">Editar</a>
-                                    <a href="#" class="btn btn-danger btn-table" onclick="deletarProduto('${rows[i].nome}', '${rows[i].descr}')">Deletar</a>
-                                </div>
-                            </td> </tr>`;                  
-    }
+  for (let i = 0; i < rows.length; i++) {
+    const dataFormatada = new Date(rows[i].data_entrega).toLocaleDateString('pt-BR');
+    tabelaResultado += `
+      <tr>
+        <td>${rows[i].nome_cliente}</td>
+        <td>${rows[i].forma_pagamento}</td>
+        <td>${rows[i].tipo_entrega}</td>
+        <td>${rows[i].tipo_venda}</td>
+        <td>${rows[i].nome_produto} - ${rows[i].descr_produto}</td>
+        <td>R$ ${rows[i].valor.replace('.', ',')}</td>
+        <td>${dataFormatada}</td>
+      </tr>`;
+  }
 
-    tabelaVendas.innerHTML = tabelaResultado;
+  tabelaResultado += `</tbody></table>`;
+  tabelaVendas.innerHTML = tabelaResultado;
 }
 
-function novoVendas() {
+async function novoVendas() {
     const formVenda = document.getElementById("venda-form");
     if (!formVenda) return;
 

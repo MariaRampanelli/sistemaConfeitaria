@@ -52,6 +52,7 @@ async function processaResultadoVendas(rows) {
       <tbody>`;
 
   for (let i = 0; i < rows.length; i++) {
+    console.log("Venda recebida:", rows[i]);
     const dataFormatada = new Date(rows[i].data_entrega).toLocaleDateString('pt-BR');
     tabelaResultado += `
       <tr>
@@ -62,7 +63,13 @@ async function processaResultadoVendas(rows) {
         <td>${rows[i].nome_produto} - ${rows[i].descr_produto}</td>
         <td>R$ ${rows[i].valor.replace('.', ',')}</td>
         <td>${dataFormatada}</td>
-      </tr>`;
+        <td>
+            <div class="is-flex is-gap-3">
+                <a href="#" class="btn btn-info btn-table" onclick="abreEditarVendas('${rows[i].id_venda}')">Editar</a>
+                <a href="#" class="btn btn-danger btn-table" onclick="deletarVendas('${rows[i].id_venda}')">Deletar</a>
+           </div>
+        </td>
+    </tr>`;
   }
 
   tabelaResultado += `</tbody></table>`;
@@ -181,14 +188,14 @@ async function editarVendas() {
     }
 }
 
-async function deletarVendas(nome, descr) {
-    try {
-        await axios.delete('/api/produto', {params: {nome, descr}});
-        console.log('Produto deletado com sucesso!');
-        alert('Produto deletado com sucesso!');
-        window.location.reload();
-    } catch (error) {
-        alert('Ocorreu um erro ao deletar o produto');
-        console.log('Ocorreu um erro ao deletar um produto: ', error);
-    }
+async function deletarVendas(id) {
+  try {
+  await axios.delete('/api/venda', { params: { id } });   
+    console.log('Venda deletada com sucesso!');
+    alert('Venda deletada com sucesso!');
+    window.location.reload();
+  } catch (error) {
+    alert('Ocorreu um erro ao deletar a venda');
+    console.log('Ocorreu um erro ao deletar uma venda:', error);
+  }
 }

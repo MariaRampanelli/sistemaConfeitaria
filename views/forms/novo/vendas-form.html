@@ -104,20 +104,6 @@
             <small>Segure Ctrl (ou Cmd) para selecionar múltiplos produtos</small>
           </div>
 
-          <div class="form-row">
-            <div class="is-flex container-label-input">
-              <label for="quantidade" class="label-form">Quantidade</label>
-              <input
-                class="input-form form-control"
-                type="number"
-                name="quant"
-                id="quantidade"
-                min="1"
-                placeholder="1"
-                value="1"
-                required
-              />
-            </div>
 
             <div class="is-flex container-label-input">
               <label for="valor" class="label-form">Valor Total</label>
@@ -155,51 +141,53 @@
   <script>
   document.addEventListener('DOMContentLoaded', () => {
     const produtoSelect = document.getElementById('produto');
-    const quantidadeInput = document.getElementById('quantidade');
     const valorInput = document.getElementById('valor');
     const vendaForm = document.getElementById('venda-form');
+  
+async function carregarProdutos() {
+  try {
+    const res = await fetch('/api/produtos');
+    if (!res.ok) throw new Error('Erro ao buscar produtos');
+    const produtos = await res.json();
 
-    async function carregarProdutos() {
-      try {
-        const res = await fetch('/api/produtos');
-        if (!res.ok) throw new Error('Erro ao buscar produtos');
-        const produtos = await res.json();
+    produtoSelect.innerHTML = '<option disabled>Selecione os produtos vendidos</option>';
 
-        produtoSelect.innerHTML = '<option disabled>Selecione os produtos vendidos</option>';
+    produtos.forEach((p) => {
+      const valor = Number(p.valor);
+      const quantidade = Number(p.quant_produzida);
 
-        produtos.forEach((p) => {
-          const valor = Number(p.valor);
-          const option = document.createElement('option');
-          option.value = JSON.stringify({ nome: p.nome, descr: p.descr });
-          option.textContent = `${p.nome} - ${p.descr} (R$ ${valor.toFixed(2)})`;
-          option.dataset.valor = valor;
-          produtoSelect.appendChild(option);
-        });
-      } catch (error) {
-        console.error('Erro ao carregar produtos:', error);
-        alert('Erro ao carregar produtos');
+      for (let i = 0; i < quantidade; i++) {
+        const option = document.createElement('option');
+        option.value = JSON.stringify({ nome: p.nome, descr: p.descr });
+        option.textContent = `${p.nome} - ${p.descr} (R$ ${valor.toFixed(2)}) [${i + 1}]`;
+        option.dataset.valor = valor;
+        produtoSelect.appendChild(option);
       }
-    }
+    });
+  } catch (error) {
+    console.error('Erro ao carregar produtos:', error);
+    alert('Erro ao carregar produtos');
+  }
+}
 
-    function calcularValor() {
-      const quantidade = Number(quantidadeInput.value) || 0;
-      let total = 0;
+function calcularValor() {
+  let total = 0;
 
-      for (const option of produtoSelect.selectedOptions) {
-        const valorUnitario = parseFloat(option.dataset.valor) || 0;
-        total += valorUnitario * quantidade;
-      }
+  for (const option of produtoSelect.selectedOptions) {
+    const valorUnitario = parseFloat(option.dataset.valor) || 0;
+    total += valorUnitario;
+  }
 
-      valorInput.value = total.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      });
-    }
+  valorInput.value = total.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+}
 
-    produtoSelect.addEventListener('change', calcularValor);
-    quantidadeInput.addEventListener('input', calcularValor);
+   produtoSelect.addEventListener('change', calcularValor);
 
-    carregarProdutos();
+   carregarProdutos();
+
 
     vendaForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -252,10 +240,10 @@
     menuBtn.addEventListener('click', () => {
       sidebar.classList.toggle('active');
     });
-  });
+});
 </script>
 
-
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="../public/scripts/mascaraMonetaria.js"></script>
   <script src="../../public/scripts/acoesForms.js"></script>
   <script src="../public/scripts/include.js" defer></script>

@@ -72,6 +72,26 @@ app.get("/api/produto", async (req, res) => {
   }
 });
 
+app.get("/api/produtos", async (req, res) => {
+  try {
+    if (req.query.nome && req.query.descr) {
+      // Busca específica
+      const produto = await db.one(
+        "SELECT * FROM produto WHERE nome = $1 AND descr = $2;",
+        [req.query.nome, req.query.descr]
+      );
+      res.status(200).json(produto);
+    } else {
+      // Lista todos
+      const produtos = await db.any("SELECT * FROM produto;");
+      res.status(200).json(produtos);
+    }
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(400);
+  }
+});
+
 app.post("/api/produto", async (req, res) => {
   try {
     const nome = req.body.nome;
@@ -131,7 +151,7 @@ app.delete("/api/produto", async (req, res) => {
 app.get('/api/vendas', async (req, res) => {
   try {
     const vendas = await db.any(`
-      SELECT v.nome_cliente, v.forma_pagamento, v.tipo_entrega, v.tipo_venda, v.data_entrega,
+      SELECT v.id_venda, v.nome_cliente, v.forma_pagamento, v.tipo_entrega, v.tipo_venda, v.data_entrega,
              p.nome AS nome_produto, p.descr AS descr_produto, p.valor
       FROM venda v
       JOIN venda_produto vp ON v.id_venda = vp.id_venda
@@ -160,7 +180,8 @@ app.delete('/api/venda', async (req, res) => {
   try {
     const id = req.query.id;
 
-    await db.none("DELETE FROM venda WHERE id = $1;", [id]);
+    await db.none("DELETE FROM venda_produto WHERE id_venda = $1;", [id]);
+    await db.none("DELETE FROM venda WHERE id_venda = $1;", [id]);
     res.sendStatus(200);
   } catch (error) {
     console.error(error);
@@ -182,7 +203,7 @@ app.post('/api/vendas', async (req, res) => {
     // Insere venda e obtém ID gerado
     const venda = await db.one(
       `INSERT INTO venda (nome_cliente, forma_pagamento, tipo_entrega, tipo_venda, data_entrega)
-       VALUES ($1, $2, $3, $4, $5) RETURNING ID_venda`,
+       VALUES ($1, $2, $3, $4, $5) RETURNING id_venda`,
       [nome_cliente, forma_pagamento, tipo_entrega, tipo_venda, data_entrega]
     );
 

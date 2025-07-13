@@ -10,7 +10,7 @@
 .dashboard h1 {
   font-size: 24px;
   margin-bottom: 20px;
-  color: #d63384; /* rosa principal */
+  color: #b832a6; /* rosa principal */
 }
 
 .cards {
@@ -31,7 +31,7 @@
 
 .card h2 {
   font-size: 20px;
-  color: #d63384;
+  color: #b832a6;
   margin-bottom: 10px;
   
 }
@@ -65,8 +65,8 @@
 }
 
 .table-card th {
-  background-color: #f9e0ef;
-  color: #d63384;
+  background-color: #f3d6f0;
+  color: #9a2a8b;
 }
 
 .top-section {

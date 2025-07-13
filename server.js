@@ -218,3 +218,27 @@ app.delete("/api/insumo", async (req, res) => {
     res.sendStatus(400).json({error: error.message});
   }
 });
+
+app.get("/api/saida", async (req, res) => {
+  try {
+    const result = await db.one("SELECT SUM(valor) AS saida FROM despesa;");
+    res.json({ saida: result.saida }).status(200);
+  } catch (error) {
+    console.error("Erro ao buscar saída:", error);
+    res.sendStatus(400);
+  }
+});
+
+app.get("/api/entrada", async (req, res) => {
+  try {
+    const result = await db.one(`
+      SELECT SUM(p.valor) AS entrada
+      FROM venda_produto vp
+      JOIN produto p ON p.nome = vp.nome_produto AND p.descr = vp.descr_produto;
+    `);
+    res.json({ entrada: result.entrada }).status(200);
+  } catch (error) {
+    console.error("Erro ao buscar entrada:", error);
+    res.sendStatus(400);
+  }
+});

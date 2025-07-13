@@ -86,10 +86,7 @@
                 </div>
             </div>
 
-            <div class="tabela-produtos container">     
-                <div id="tabelaVendas"> <p style="color:red">Teste de renderização</p>
-               </div> 
-                <script src="/public/scripts/vendaHtml.js"></script>          
+            <div class="tabela-produtos container" id="tabelaVendas">               
                <!-- <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
@@ -124,6 +121,7 @@
 </body>
 
 <script src="/public/scripts/include.js"></script>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("menu-button");
@@ -134,5 +132,7 @@
     });
   });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/public/scripts/vendasHtml.js"></script>
 
 </html>

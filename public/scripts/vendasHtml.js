@@ -6,8 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     tabelaVendas();
     novoVendas();
     editarVendas();
-    deletarVendas();
-    processaResultadoVendas();
 });
 
 function tabelaVendas() {

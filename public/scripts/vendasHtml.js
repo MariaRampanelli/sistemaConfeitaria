@@ -57,8 +57,9 @@ function processaResultadoVendas(rows) {
         tabelaResultado += `<tr> <td class="linha-tabela">${rows[i].nome_cliente}</td>`;
         tabelaResultado += `<td class="linha-tabela">${rows[i].forma_pagamento}</td>`;
         tabelaResultado += `<td class="linha-tabela">R$ ${rows[i].valor.replace('.', ',')}</td>`;
-        tabelaResultado += `<td class="linha-tabela">${rows[i].quant_produzida}</td>`;
-        tabelaResultado += `<td class="linha-tabela">${formataData(rows[i].data_validade)}</td>`;
+        tabelaResultado += `<td class="linha-tabela">${rows[i].tipo_entrega}</td>`;
+        tabelaResultado += `<td class="linha-tabela">${rows[i].tipo_venda}</td>`;
+        tabelaResultado += `<td class="linha-tabela">${formataData(rows[i].data_entrega)}</td>`;
         tabelaResultado += `<td>
                                 <div class="is-flex is-gap-3">
                                     <a href="#" class="btn btn-info btn-table" onclick="abreEditarProduto('editar-produto', '${rows[i].nome}', '${rows[i].descr}')">Editar</a>
@@ -67,7 +68,7 @@ function processaResultadoVendas(rows) {
                             </td> </tr>`;                  
     }
 
-    tabelaProdutos.innerHTML = tabelaResultado;
+    tabelaVendas.innerHTML = tabelaResultado;
 }
 
 function novoVendas() {
@@ -88,14 +89,14 @@ function novoVendas() {
         JSON.parse(opt.value)
         );
 
-        if (produtos.length === 0) {
+        if (produtosSelecionados.length === 0) {
             alert("Selecione pelo menos um produto.");
             return;
         }
 
         try {
             // Consulta ao backend se os produtos estão no cardápio
-            const resposta = await axios.post("/api/verifica-cardapio", { produtos });
+            const resposta = await axios.post("/api/verifica-cardapio", { produtos: produtosSelecionados });
             const verificados = resposta.data;
 
             // Se algum produto não estiver no cardápio, tipo_venda é Encomenda

@@ -142,35 +142,45 @@ app.delete('/api/venda', async (req, res) => {
   }
 });
 
-app.post("/api/verifica-cardapio", async (req, res) => {
-    const { produtos } = req.body;
+app.post('/api/vendas', async (req, res) => {
+  const {
+    nome_cliente,
+    forma_pagamento,
+    tipo_entrega,
+    tipo_venda,
+    data_entrega,
+    produtos
+  } = req.body;
 
-    try {
-        const hoje = new Date().toISOString().split("T")[0];
+  try {
+    // Insere venda e obtém ID gerado
+    const venda = await db.one(
+      `INSERT INTO venda (nome_cliente, forma_pagamento, tipo_entrega, tipo_venda, data_entrega)
+       VALUES ($1, $2, $3, $4, $5) RETURNING ID_venda`,
+      [nome_cliente, forma_pagamento, tipo_entrega, tipo_venda, data_entrega]
+    );
 
-        const resultados = [];
+    console.log('Venda retornada:', venda);
 
-        for (const p of produtos) {
-            const resultado = await db.oneOrNone(
-                `SELECT 1 FROM produto_cardapio 
-                 WHERE nome_produto = $1 AND descr_produto = $2 
-                 AND $3 BETWEEN data_ini AND data_fin`,
-                [p.nome, p.descr, hoje]
-            );
+    const ID_venda = venda.id_venda;
 
-            resultados.push({
-                ...p,
-                tipo: resultado ? "Cardápio" : "Encomenda"
-            });
-        }
+    // Monta os valores para venda_produto
+    const queries = produtos.map((p) => {
+      return db.none(
+        `INSERT INTO venda_produto (ID_venda, nome_produto, descr_produto)
+         VALUES ($1, $2, $3)`,
+        [ID_venda, p.nome, p.descr]
+      );
+    });
 
-        res.json(resultados);
-    } catch (error) {
-        console.error("Erro ao verificar cardápio:", error);
-        res.status(500).json({ error: "Erro ao verificar cardápio" });
-    }
+    await Promise.all(queries);
+
+    res.status(201).json({ mensagem: 'Venda cadastrada com sucesso!' });
+  } catch (error) {
+    console.error('Erro ao salvar venda:', error.message);
+    res.status(500).json({ erro: error.message });
+  }
 });
-
 
 
 // ----- Requisições para Insumos -----

@@ -219,6 +219,8 @@ app.delete("/api/insumo", async (req, res) => {
   }
 });
 
+//---- REQUISIÇÕES ENTRADA E SAÍDA -----
+
 app.get("/api/saida", async (req, res) => {
   try {
     const result = await db.one("SELECT SUM(valor) AS saida FROM despesa;");
@@ -242,3 +244,4 @@ app.get("/api/entrada", async (req, res) => {
     res.sendStatus(400);
   }
 });
+

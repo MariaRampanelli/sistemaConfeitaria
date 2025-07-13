@@ -6,10 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     tabelaVendas();
     novoVendas();
     editarVendas();
-<<<<<<< HEAD
-    deletarVendas();
-=======
->>>>>>> b91ab40bc692534f356c2cc0944d6ae8460fa3fd
 });
 
 async function tabelaVendas() {

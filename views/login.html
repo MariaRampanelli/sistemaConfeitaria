@@ -20,6 +20,53 @@
 
       <button class="login-button" type="submit">Entrar</button>
     </form>
+
+    <div class="link-redirecionar">
+      <a onclick="redirecionaCardapioSemanal()">
+        Não possui login? Entre para visualizar o cardápio semanal sem precisar efetuar login!
+      </a>
+    </div>
   </div>
 </body>
+<script>
+  function redirecionaCardapioSemanal() {
+    window.location.href = '/cardapio-semanal';
+  }
+
+  document.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            useremail: email,
+            password: password
+          })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro na requisição: ${response.status}`);
+      }
+
+      const data = await response.json();
+      localStorage.setItem('token', data.token);
+      if (data.permissao === 'admin') {
+          window.location.href = '/index';
+        } else {
+          alert('Usuário não encontrado. Senha/email digitados incorretamente ou você não possui login!');
+        }
+
+    } catch (error) {
+      alert('Desculpe, ocorreu um erro ao realizar o login. Tente novamente mais tarde');
+      console.log('Erro: ', error);
+    }
+  });
+</script>
 </html>

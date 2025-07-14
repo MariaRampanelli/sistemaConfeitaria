@@ -3,7 +3,6 @@
     position: fixed;
     top: 0;
     height: 118px;
-    justify-content: flex-start;
     padding-left: 1em;
     background-color: var(--cinza-claro);
     border-bottom: 2px solid var(--cinza-medio);

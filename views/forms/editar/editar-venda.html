@@ -12,20 +12,26 @@
 </head>
 <body>
     <nav class="nav-bar">
-        <div class="div-nav-bar">
-            <div class="is-flex m-1">
-                <button id="menu-button" class="menu-button">
-                    <img src="/public/images/icons/list.svg" alt="Ícone de lista">
-                </button>
-            </div>
+        <div class="div-nav-bar justify-content-between">
+          <div class="d-flex flex-row">
+              <div class="is-flex m-1">
+                  <button id="menu-button" class="menu-button">
+                      <img src="/public/images/icons/list.svg" alt="Ícone de lista">
+                  </button>
+              </div>
 
-            <img class="img-logo" src="../public/images/logo_lilian.png" alt="Logo da Lilian Sweets">
-            <p class="welcome-text">Bem-vinda <strong class="destaque">Lilian!</strong></p>
+              <img class="img-logo" src="../public/images/logo_lilian.png" alt="Logo da Lilian Sweets">
+              <p class="welcome-text">Bem-vinda <strong class="destaque">Lilian!</strong></p>
+          </div>
+
+          <div>
+            <button class="btn btn-salvar mt-4 mr-4" onclick="logout()">Sair</button>
+          </div>
         </div>
     </nav>
     
      <div class="side-bar">
-        <a href="/" class="side-bar-link">
+        <a href="/index" class="side-bar-link">
             <img class="side-bar-icon" src="../public/images/icons/house.svg" alt="Ícone de uma casa">
             Início
         </a>

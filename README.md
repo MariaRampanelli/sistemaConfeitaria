@@ -48,4 +48,16 @@ Ao questionar Lilian pelas funcionalidades desejadas no novo sistema, a dona da 
  ## Modelo Lógico Relacional
 
  É possível encontrar o modelo lógico do Banco de Dados na pasta do projeto, identificado pelo arquivo modelo-logico.png.
+
+ ## Bibliotecas utilizadas
+
+ Para o desenvolvimento do projeto foram utilizadas algumas bibliotecas do Node, que foram instaladas usando o comando npm install:
+ * express
+ * pg-promise
+ * express-session
+ * passport
+ * passport-local
+ * passport-jwt
+ * jsonwebtoken
+ * bcrypt
   

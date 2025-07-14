@@ -65,7 +65,7 @@ async function processaResultadoVendas(rows) {
         <td>${dataFormatada}</td>
         <td>
             <div class="is-flex is-gap-3">
-                <a href="#" class="btn btn-info btn-table" onclick="abreEditarVendas('${rows[i].id_venda}')">Editar</a>
+                <a href="/editar-venda?id=${rows[i].id_venda}" class="btn btn-info btn-table">Editar</a>
                 <a href="#" class="btn btn-danger btn-table" onclick="deletarVendas('${rows[i].id_venda}')">Deletar</a>
            </div>
         </td>
@@ -129,63 +129,67 @@ async function novoVendas() {
     });
 }
 
-
 async function editarVendas() {
-    const editarForm = document.getElementById('produtos-editar');
-    if (!editarForm) {
-        return;
-    }
+  const editarForm = document.getElementById('venda-edit-form');
+  if (!editarForm) return;
 
-    const params = new URLSearchParams(window.location.search);
-    const nome = params.get('nome');
-    const descr = params.get('descr');
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
 
-    // Primeiro pega os dados daquele produto
-    try {
-        const response = await axios.get('/api/produto', {
-            params: {nome, descr}
-        });
+  try {
+    const resposta = await axios.get('/api/venda-detalhada', { params: { id } });
+    const venda = resposta.data;
 
-        const produto = response.data;
-        console.log(produto)
+    // Preencher campos básicos
+    document.getElementById('nome-cliente-edit').value = venda.nome_cliente;
+    document.getElementById('forma-pagamento-edit').value = venda.forma_pagamento;
+    document.getElementById('tipo-entrega-edit').value = venda.tipo_entrega;
+    document.getElementById('data-entrega-edit').value = venda.data_entrega.split('T')[0];
+    document.getElementById('tipo-venda-edit').value = venda.tipo_venda;
 
-        document.getElementById('nome-produto-edit').value = produto.nome;
-        document.getElementById('data-produto-edit').value = produto.data_validade.split('T')[0];
-        document.getElementById('descr-edit').value = produto.descr;
-        document.getElementById('valor-edit').value = 'R$' + produto.valor.replace('.', ',');
-        document.getElementById('quant-edit').value = produto.quant_produzida;
+    // Preencher produtos (exemplo simples com checkbox ou multi-select)
+    const produtoSelect = document.getElementById('produtos-edit');
+    produtoSelect.innerHTML = '';
 
-        editarForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
+    venda.produtos.forEach(produto => {
+      const option = document.createElement('option');
+      option.value = JSON.stringify(produto);
+      option.textContent = `${produto.nome_produto} - ${produto.descr_produto}`;
+      option.selected = true;
+      produtoSelect.appendChild(option);
+    });
 
-            const nomeEdit = document.getElementById('nome-produto-edit').value;
-            const descrEdit = document.getElementById('descr-edit').value;
-            const valorStringEdit = document.getElementById('valor-edit').value.replace('R$', '').replace(',', '.');
-            const valorEdit = parseFloat(valorStringEdit);
-            const quantEdit = document.getElementById('quant-edit').value;
-            const data_validadeEdit = document.getElementById('data-produto-edit').value;
+    editarForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
 
-            try {
-                await axios.put('/api/produto', {
-                    nome: nomeEdit,
-                    descr: descrEdit,
-                    valor: valorEdit,
-                    quant: quantEdit,
-                    data_validade: data_validadeEdit
-                });
+      // Coletar dados atualizados
+      const nome_cliente = document.getElementById('nome-cliente-edit').value;
+      const forma_pagamento = document.getElementById('forma-pagamento-edit').value;
+      const tipo_entrega = document.getElementById('tipo-entrega-edit').value;
+      const tipo_venda = document.getElementById('tipo-venda-edit').value;
+      const data_entrega = document.getElementById('data-entrega-edit').value;
 
-                console.log('Produto editado com sucesso!');
-                alert('Produto editado com sucesso!');
-                window.location.href = '/produtos';
-            } catch (error) {
-                alert('Ocorreu um erro ao editar o produto.');
-                console.log('Erro ao editar produto:', error);
-            }
+      const produtosSelecionados = Array.from(produtoSelect.selectedOptions).map(opt => JSON.parse(opt.value));
 
-        })
-    } catch (error) {
-        console.log('Ocorreu um erro ao editar o produto: ', error);
-    }
+      // Enviar para o backend
+      await axios.put('/api/venda', {
+        id_venda: id,
+        nome_cliente,
+        forma_pagamento,
+        tipo_entrega,
+        tipo_venda,
+        data_entrega,
+        produtos: produtosSelecionados
+      });
+
+      alert('Venda editada com sucesso!');
+      window.location.href = '/vendas';
+    });
+
+  } catch (error) {
+    console.error('Erro ao carregar venda:', error);
+    alert('Não foi possível carregar os dados da venda.');
+  }
 }
 
 async function deletarVendas(id) {

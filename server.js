@@ -270,12 +270,29 @@ app.get('/api/vendas', async (req, res) => {
 app.get('/api/venda', async (req, res) => {
   try {
     const id = req.query.id;
-    
-    const venda = await db.one("SELECT * FROM venda WHERE id = $1;", [id]);
-    res.json(venda).status(200);
+
+    // Busca os dados da venda
+    const venda = await db.one(`
+      SELECT id_venda, nome_cliente, forma_pagamento, tipo_entrega, tipo_venda, data_entrega
+      FROM venda
+      WHERE id_venda = $1
+    `, [id]);
+
+    // Busca os produtos vinculados à venda
+    const produtos = await db.any(`
+      SELECT nome_produto, descr_produto
+      FROM venda_produto
+      WHERE id_venda = $1
+    `, [id]);
+
+    res.status(200).json({
+      ...venda,
+      produtos
+    });
+
   } catch (error) {
-    console.error(error);
-    res.sendStatus(400);
+    console.error('Erro ao buscar venda:', error);
+    res.status(400).json({ erro: error.message });
   }
 });
 
@@ -329,6 +346,63 @@ app.post('/api/vendas', async (req, res) => {
   } catch (error) {
     console.error('Erro ao salvar venda:', error.message);
     res.status(500).json({ erro: error.message });
+  }
+});
+
+app.put('/api/venda', async (req, res) => {
+  console.log("ID da venda recebido:", req.body.id_venda);
+  const {
+    id_venda,
+    nome_cliente,
+    forma_pagamento,
+    tipo_entrega,
+    tipo_venda,
+    data_entrega,
+    produtos
+  } = req.body;
+
+  console.log("Recebendo edição da venda:", req.body);
+
+  if (!id_venda) {
+    return res.status(400).json({ erro: "ID da venda não enviado." });
+  }
+
+  try {
+    // Atualiza os dados da venda
+    await db.none(`
+      UPDATE venda
+      SET nome_cliente = $1,
+          forma_pagamento = $2,
+          tipo_entrega = $3,
+          tipo_venda = $4,
+          data_entrega = $5
+      WHERE id_venda = $6
+    `, [nome_cliente, forma_pagamento, tipo_entrega, tipo_venda, data_entrega, id_venda]);
+
+    // Remove os produtos anteriores
+    await db.none(`DELETE FROM venda_produto WHERE id_venda = $1`, [id_venda]);
+
+    // Remove produtos duplicados (caso venham repetidos)
+    const produtosUnicos = Array.from(
+      new Map(produtos.map(p => [`${p.nome}-${p.descr}`, p])).values()
+    );
+
+    // Insere novos produtos vinculados
+    const queries = produtosUnicos.map(p =>
+      db.none(
+        `INSERT INTO venda_produto (id_venda, nome_produto, descr_produto)
+         VALUES ($1, $2, $3)`,
+        [id_venda, p.nome, p.descr]
+      )
+    );
+
+    await Promise.all(queries);
+
+    res.status(200).json({ mensagem: 'Venda atualizada com sucesso!' });
+
+  } catch (error) {
+    console.error("Erro ao atualizar venda:", error);
+    res.status(500).json({ erro: "Erro ao atualizar venda." });
   }
 });
 

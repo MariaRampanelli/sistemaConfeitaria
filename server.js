@@ -436,6 +436,31 @@ app.get("/api/entrada", async (req, res) => {
   }
 });
 
+// Requisições para Despesas
+app.get("/api/despesas", async (req, res) => {
+  try {
+    const produtos = await db.any("SELECT * FROM despesa;");
+    console.log("Despesas retornados");
+    res.json(produtos).status(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
+app.get("/api/insumo", async (req, res) => {
+  try {
+    const nomeInsumo = req.query.nome;
+    const insumo = await db.one("SELECT * FROM insumo WHERE nome = $1;",
+      [nomeInsumo]
+    );
+    res.json(insumo).status(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(400);
+  }
+});
+
 // Para ter acesso as rotas
 const indexRouter = require('./rotas/rotas.js');
 app.use('/', indexRouter);

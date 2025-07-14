@@ -32,7 +32,7 @@ router.get('/', (req, res) => {
     res.redirect('/login');
 });
 
-router.get('/index', verificaAcessoJWT, apenasAdmin, (req, res) => {
+router.get('/index', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'index.html'));
 });
 

@@ -54,3 +54,16 @@
 .img-tabela {
     width: 100px;
 }
+
+@media screen and (max-width: 840px) {
+   .main-tabela {
+      max-width: 80%;
+      margin-top: 150px;
+   }
+ }
+
+ @media screen and (max-width: 768px) {
+   .main-tabela {
+      padding-left: 3rem;
+   }
+ }

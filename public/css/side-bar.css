@@ -30,6 +30,24 @@
     padding-right: 0.3em;
 }
 
+ @media screen and (max-width: 1245px) {
+    .side-bar {
+        width: 295px;
+    }
+ }
+
+  @media screen and (max-width: 1150px) {
+    .side-bar {
+        width: 245px;
+    }
+ }
+
+  @media screen and (max-width: 1039px) {
+    .side-bar {
+        width: 225px;
+    }
+ }
+
 @media screen and (max-width: 840px) {
     .side-bar {
         padding-top: 35px;

@@ -204,7 +204,7 @@ function calcularValor() {
       const nomeCliente = document.getElementById('nome-cliente').value;
       const tipoVenda = document.getElementById('tipo-venda').value;
       const tipoEntrega = document.getElementById('tipo-entrega').value;
-      const quantidade = Number(quantidadeInput.value);
+      const quantidade = produtoSelect.selectedOptions.length;
       const produtosSelecionados = Array.from(produtoSelect.selectedOptions).map((opt) =>
         JSON.parse(opt.value)
       );

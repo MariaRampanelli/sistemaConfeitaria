@@ -87,10 +87,10 @@
                             <label for="forma-pagamento" class="label-form">Forma de pagamento</label>
                             <select class="form-select input-form form-control" name="forma-pagamento" id="forma-pagamento-despesa" required>
                                 <option value="" disabled selected>Selecione</option>
-                                <option value="pix">Pix</option>
-                                <option value="dinheiro">Dinheiro</option>
-                                <option value="credito">Cartão de crédito</option>
-                                <option value="debito">Cartão de débito</option>
+                                <option value="Pix">Pix</option>
+                                <option value="Dinheiro">Dinheiro</option>
+                                <option value="Credito">Cartão de crédito</option>
+                                <option value="Debito">Cartão de débito</option>
                             </select>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
 
                     <div class="is-flex container-label-input">
                         <label for="obs" class="label-form">Observação</label>
-                        <input class="input-form form-control" type="text" id="obs-despesa" name="obs-despesa">
+                        <input class="input-form form-control" type="text" id="obs-despesa" name="obs-despesa" placeholder="Observação">
                     </div>
 
                     <div class="container-form-buttons is-flex is-gap-15">
@@ -114,10 +114,9 @@
         </div>
     </main>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/public/scripts/insumosHtml.js"></script>
+
 <script src="../public/scripts/mascaraMonetaria.js"></script>
-<script src="../../public/scripts/acoesForms.js"></script>
+<script src="/public/scripts/acoesForms.js"></script>
 <script src="../public/scripts/include.js" defer></script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -136,4 +135,6 @@
     }
   }
 </script>
+<script src="/public/scripts/despesasHtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </html>

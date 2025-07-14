@@ -4,6 +4,7 @@ axios.defaults.headers.common["Content-Type"] =
 
 document.addEventListener("DOMContentLoaded", () => {
     tabelaDespesas();
+    novaDespesa();
 });
 
 function tabelaDespesas() {
@@ -25,7 +26,7 @@ function processaResultadoDespesas(rows) {
 
     if (rows.length == 0) {
         const p = document.createElement('p');
-        p.textContent = 'Nenhuma despesa cadastrada. Mas assim que cadatrar uma, ela aparecerá aqui!';
+        p.textContent = 'Nenhuma despesa cadastrada. Mas assim que cadastrar uma, ela aparecerá aqui!';
         p.style.color = 'black';
         p.classList.add('text-center', 'mt-3');
         p.style.fontWeight = 'bold';
@@ -48,17 +49,45 @@ function processaResultadoDespesas(rows) {
         <tbody scope="row">`;
 
     for (let i = 0; i < rows.length; i++) {
-        tabelaResultado += `<tr> <td class="linha-tabela">${rows[i].valor.replace('.', ',')}</td>`;
+        tabelaResultado += `<tr> <td class="linha-tabela">R$ ${rows[i].valor.replace('.', ',')}</td>`;
         tabelaResultado += `<td class="linha-tabela">${rows[i].forma_pagamento}</td>`;
-        tabelaResultado += `<td class="linha-tabela">R$ ${rows[i].data_pagamento}</td>`;
+        tabelaResultado += `<td class="linha-tabela">${formataData(rows[i].data_pagamento)}</td>`;
         tabelaResultado += `<td class="linha-tabela">${rows[i].obs}</td>`;
         tabelaResultado += `<td>
                                 <div class="is-flex is-gap-3">
-                                    <a href="#" class="btn btn-info btn-table" onclick="abreEditarDespesa('editar-despesa', '${rows[i].id_despesa}')">Editar</a>
+                                    <a href="/editar-despesa?id=${rows[i].id_despesa}" class="btn btn-info btn-table">Editar</a>
                                     <a href="#" class="btn btn-danger btn-table" onclick="deletarDespesa('${rows[i].id_despesa}')">Deletar</a>
                                 </div>
                             </td> </tr>`;                  
     }
 
     tabelaDespesas.innerHTML = tabelaResultado;
+}
+
+function novaDespesa() {
+    const formDespesa = document.getElementById('despesa-form');
+    if (!formDespesa) {
+        return;
+    }
+
+    formDespesa.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const valorString = document.getElementById('valor-despesa').value.replace('R$', '').replace(',', '.');
+        const valor = parseFloat(valorString);
+        const pagamento = document.getElementById('forma-pagamento-despesa').value;
+        const data = document.getElementById('data-pagamento-despesa').value;
+        const obs = document.getElementById('obs-despesa').value;
+
+        try {
+            await axios.post('/api/despesa', {valor, pagamento, data, obs});
+            console.log('Despesa cadastrada com sucesso!');
+            alert('Despesa cadastrada com sucesso!');
+            formDespesa.reset();
+            window.location.href = 'http://localhost:3000/despesas';
+        } catch (error) {
+            alert('Ocorreu um erro ao inserir a despesa');
+            console.log('Ocorreu um erro ao inserir uma despesa: ', error);
+        }
+    });
 }

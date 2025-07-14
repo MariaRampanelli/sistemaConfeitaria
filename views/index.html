@@ -228,52 +228,55 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const ctxBarras = document.getElementById('graficoBarras').getContext('2d');
+  const ctxBarras = document.getElementById('graficoBarras').getContext('2d');
 
-    const graficoBarras = new Chart(ctxBarras, {
-      type: 'bar',
-      data: {
-        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'],
-        datasets: [
-          {
-            label: 'Entrada',
-            data: [10000, 8000, 12000, 11000, 13000, 12500, 14000],
-            backgroundColor: '#c77dff'
-          },
-          {
-            label: 'Saída',
-            data: [7000, 5000, 10000, 9500, 11500, 11000, 12000],
-            backgroundColor: '#b832a6'
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'bottom'
-          },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                return `${context.dataset.label}: R$ ${context.parsed.y.toLocaleString()}`;
+  fetch("/api/movimentacao-mensal")
+    .then(res => res.json())
+    .then(data => {
+      const graficoBarras = new Chart(ctxBarras, {
+        type: 'bar',
+        data: {
+          labels: data.labels,
+          datasets: [
+            {
+              label: 'Entrada',
+              data: data.entrada,
+              backgroundColor: '#c77dff'
+            },
+            {
+              label: 'Saída',
+              data: data.saida,
+              backgroundColor: '#b832a6'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'bottom' },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `${context.dataset.label}: R$ ${context.parsed.y.toLocaleString()}`;
+                }
               }
             }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: function(value) {
-                return `R$ ${value.toLocaleString()}`;
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(value) {
+                  return `R$ ${value.toLocaleString()}`;
+                }
               }
             }
           }
         }
-      }
-    });
-  });
+      });
+    })
+    .catch(err => console.error("Erro ao buscar gráfico:", err));
+});
 </script>
 <script src="/public/scripts/include.js"></script>
 </html>

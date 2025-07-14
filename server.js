@@ -508,6 +508,56 @@ app.get("/api/entrada", async (req, res) => {
   }
 });
 
+app.get('/api/movimentacao-mensal', async (req, res) => {
+  try {
+    const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+
+    // ENTRADAS
+    const entradasQuery = await db.any(`
+      SELECT 
+        EXTRACT(MONTH FROM v.data_entrega) AS mes,
+        SUM(p.valor) AS total
+      FROM venda v
+      JOIN venda_produto vp ON v.ID_venda = vp.ID_venda
+      JOIN produto p ON vp.nome_produto = p.nome AND vp.descr_produto = p.descr
+      GROUP BY mes
+      ORDER BY mes;
+    `);
+
+    // SAÍDAS
+    const saidasQuery = await db.any(`
+      SELECT 
+        EXTRACT(MONTH FROM data_pagamento) AS mes,
+        SUM(valor) AS total
+      FROM despesa
+      GROUP BY mes
+      ORDER BY mes;
+    `);
+
+    const entradaPorMes = Array(12).fill(0);
+    entradasQuery.forEach(row => {
+      entradaPorMes[row.mes - 1] = parseFloat(row.total);
+    });
+
+    const saidaPorMes = Array(12).fill(0);
+    saidasQuery.forEach(row => {
+      saidaPorMes[row.mes - 1] = parseFloat(row.total);
+    });
+
+    res.json({
+      labels: meses,
+      entrada: entradaPorMes,
+      saida: saidaPorMes
+    });
+
+  } catch (error) {
+    console.error("Erro ao buscar movimentações:", error);
+    res.status(500).json({ error: "Erro interno do servidor" });
+  }
+});
+
+
+
 // Requisições para Despesas
 app.get("/api/despesas", async (req, res) => {
   try {

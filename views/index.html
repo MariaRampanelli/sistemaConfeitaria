@@ -91,23 +91,15 @@
         <h3>Insumos com baixo estoque</h3>
         <table class="table-card">
           <thead class="thead">
-            <tr>
-              <th>Insumo</th>
-              <th>Quantidade</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Farinha</td>
-              <td>2 kg</td>
-            </tr>
-            <tr>
-              <td>Açúcar</td>
-              <td>1 kg</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+           <tr>
+            <th>Insumo</th>
+            <th>Quantidade</th>
+           </tr>
+         </thead>
+        <tbody id="tabela-insumos">
+      </tbody>
+    </table>
+  </div>
 
       <div class="table-card flex-fill" style="min-width: 300px;">
         <h3>Próximos pedidos</h3>
@@ -216,6 +208,35 @@
       }
     });
   });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  fetch('/api/insumos-baixo-estoque')
+    .then(res => res.json())
+    .then(insumos => {
+      const tbody = document.querySelector("#tabela-insumos");
+      tbody.innerHTML = "";
+
+      if (insumos.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="2" style="text-align:center;">Todos os insumos estão com estoque adequado.</td></tr>`;
+        return;
+      }
+
+      insumos.forEach(insumo => {
+        const row = `
+          <tr>
+            <td>${insumo.nome}</td>
+            <td>${insumo.quant}</td>
+          </tr>
+        `;
+        tbody.insertAdjacentHTML("beforeend", row);
+      });
+    })
+    .catch(err => {
+      console.error("Erro ao carregar insumos com baixo estoque:", err);
+    });
+});
 </script>
 
 <script>

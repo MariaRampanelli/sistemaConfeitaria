@@ -576,6 +576,22 @@ app.get('/api/proximos-pedidos', async (req, res) => {
   }
 });
 
+app.get('/api/insumos-baixo-estoque', async (req, res) => {
+  try {
+    const insumos = await db.any(`
+      SELECT nome, quant
+      FROM insumo
+      WHERE quant < 5
+      ORDER BY quant ASC
+    `);
+    res.json(insumos);
+  } catch (error) {
+    console.error('Erro ao buscar insumos com baixo estoque:', error);
+    res.status(500).json({ erro: 'Erro interno do servidor' });
+  }
+});
+
+
 // Requisições para Despesas
 app.get("/api/despesas", async (req, res) => {
   try {

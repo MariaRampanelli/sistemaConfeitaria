@@ -514,7 +514,7 @@ app.get("/api/entrada", async (req, res) => {
 app.get("/api/despesas", async (req, res) => {
   try {
     const produtos = await db.any("SELECT * FROM despesa;");
-    console.log("Despesas retornados");
+    console.log("Despesas retornadas");
     res.json(produtos).status(200);
   } catch (error) {
     console.log(error);
@@ -522,13 +522,13 @@ app.get("/api/despesas", async (req, res) => {
   }
 });
 
-app.get("/api/insumo", async (req, res) => {
+app.get("/api/despesa", async (req, res) => {
   try {
-    const nomeInsumo = req.query.nome;
-    const insumo = await db.one("SELECT * FROM insumo WHERE nome = $1;",
-      [nomeInsumo]
+    const id_despesa = req.query.id_despesa;
+    const despesa = await db.one("SELECT * FROM despesa WHERE id_despesa  = $1;",
+      [id_despesa]
     );
-    res.json(insumo).status(200);
+    res.json(despesa).status(200);
   } catch (error) {
     console.log(error);
     res.sendStatus(400);

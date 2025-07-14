@@ -533,6 +533,26 @@ app.get("/api/despesa", async (req, res) => {
   }
 });
 
+app.post("/api/despesa", async (req, res) => {
+  try {
+    const valor = req.body.valor;
+    const pagamento = req.body.pagamento;
+    const data = req.body.data;
+    const obs = req.body.obs;
+
+    const novaDespesa = await db.one(
+      "INSERT INTO despesa(valor,forma_pagamento,data_pagamento,obs) VALUES ($1, $2, $3, $4) RETURNING *;",
+      [valor, pagamento, data, obs]
+    );
+
+    console.log('Despesa criado!');
+    res.status(200).json(novaDespesa);
+  } catch(error) {
+    console.log(error);
+    res.sendStatus(400).json({error: error.message});
+  }
+});
+
 // Para ter acesso as rotas
 const indexRouter = require('./rotas/rotas.js');
 app.use('/', indexRouter);

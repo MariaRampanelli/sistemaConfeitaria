@@ -86,7 +86,7 @@ async function novoVendas() {
         const nome_cliente = document.getElementById("nome-cliente").value;
         const forma_pagamento = document.getElementById("forma-pagamento").value;
         const tipo_entrega = document.getElementById("tipo-entrega").value;
-        const dataEntrega = document.getElementById("data-entrega").value;
+        const data_entrega = document.getElementById("data-entrega").value;
 
         // Captura os produtos selecionados
         const produtoSelect = document.getElementById('produto');

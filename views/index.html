@@ -86,65 +86,57 @@
       </div>
     </div>
 
-    <div class="table-card">
-      <h3>Insumos com baixo estoque</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Insumo</th>
-            <th>Quantidade</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Farinha</td>
-            <td>2 kg</td>
-          </tr>
-          <tr>
-            <td>Açúcar</td>
-            <td>1 kg</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="d-flex flex-grow-1 flex-wrap">
+      <div class="table-card mr-3 flex-fill" style="min-width: 300px;">
+        <h3>Insumos com baixo estoque</h3>
+        <table class="table-card">
+          <thead class="thead">
+            <tr>
+              <th>Insumo</th>
+              <th>Quantidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Farinha</td>
+              <td>2 kg</td>
+            </tr>
+            <tr>
+              <td>Açúcar</td>
+              <td>1 kg</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-     <div class="table-card">
-      <h3>Próximos pedidos</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Cliente</th>
-            <th>Produto</th>
-            <th>Data de entrega</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Ana</td>
-            <td>Bolo de chocolate</td>
-            <td>05/04/2025</td>
-          </tr>
-          <tr>
-            <td>Lucas</td>
-            <td>Torta de limão</td>
-            <td>25/08/2025</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-card flex-fill" style="min-width: 300px;">
+        <h3>Próximos pedidos</h3>
+        <table class="table-card">
+          <thead class="thead">
+            <tr>
+              <th>Cliente</th>
+              <th>Produto</th>
+              <th>Data de entrega</th>
+            </tr>
+          </thead>
+          <tbody id="proximos-pedidos-tbody">
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
-<div class="graphic-section">
-  <div class="card card-grafico">
-    <h3>Gráfico de Vendas </h3>
-    <canvas id="graficoBarras"></canvas>
-  </div>
+  <div class="graphic-section d-flex flex-wrap mt-4">
+    <div class="card card-grafico flex-fill mr-3">
+      <h3>Gráfico de Vendas</h3>
+      <canvas id="graficoBarras"></canvas>
+    </div>
 
-  <div class="card card-grafico">
-    <h3>Gráfico de Vendas </h3>
-    <canvas id="graficoPizza"></canvas>
+    <div class="card card-grafico flex-fill">
+      <h3>Gráfico de Vendas</h3>
+      <canvas id="graficoPizza"></canvas>
+    </div>
   </div>
-</div>
 </main>  
 
 <script>
@@ -224,6 +216,37 @@
       }
     });
   });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  fetch('/api/proximos-pedidos')
+    .then(res => res.json())
+    .then(pedidos => {
+      const tbody = document.getElementById('proximos-pedidos-tbody');
+      tbody.innerHTML = '';
+
+      if (pedidos.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;">Nenhum pedido futuro cadastrado.</td></tr>`;
+        return;
+      }
+
+      pedidos.forEach(pedido => {
+        const dataEntrega = new Date(pedido.data_entrega).toLocaleDateString('pt-BR');
+        const row = `
+          <tr>
+            <td>${pedido.nome_cliente}</td>
+            <td>${pedido.nome}</td>
+            <td>${dataEntrega}</td>
+          </tr>
+        `;
+        tbody.insertAdjacentHTML('beforeend', row);
+      });
+    })
+    .catch(err => {
+      console.error("Erro ao carregar próximos pedidos:", err);
+    });
+});
 </script>
 
 <script>

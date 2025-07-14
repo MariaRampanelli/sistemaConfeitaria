@@ -557,6 +557,24 @@ app.get('/api/movimentacao-mensal', async (req, res) => {
 });
 
 
+app.get('/api/proximos-pedidos', async (req, res) => {
+  try {
+    const pedidos = await db.any(`
+      SELECT v.nome_cliente, p.nome, v.data_entrega
+      FROM venda v
+      JOIN venda_produto vp ON v.ID_venda = vp.ID_venda
+      JOIN produto p ON vp.nome_produto = p.nome AND vp.descr_produto = p.descr
+      WHERE v.tipo_venda = 'encomenda'
+        AND v.data_entrega >= CURRENT_DATE
+      ORDER BY v.data_entrega ASC
+      LIMIT 10;
+    `);
+    res.json(pedidos);
+  } catch (error) {
+    console.error("Erro ao buscar próximos pedidos:", error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
 
 // Requisições para Despesas
 app.get("/api/despesas", async (req, res) => {

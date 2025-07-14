@@ -561,12 +561,12 @@ app.get('/api/movimentacao-mensal', async (req, res) => {
 // Requisições para Despesas
 app.get("/api/despesas", async (req, res) => {
   try {
-    const produtos = await db.any("SELECT * FROM despesa;");
+    const despesas = await db.any("SELECT * FROM despesa;");
     console.log("Despesas retornadas");
-    res.json(produtos).status(200);
+    res.status(200).json(despesas);
   } catch (error) {
     console.log(error);
-    res.sendStatus(400);
+    res.status(400).json({ error: "Erro ao buscar despesas" });
   }
 });
 
@@ -585,6 +585,9 @@ app.get("/api/despesa", async (req, res) => {
 
 app.post("/api/despesa", async (req, res) => {
   try {
+
+    console.log("Dados recebidos no backend:", req.body); // <-- Adicione isso
+
     const valor = req.body.valor;
     const pagamento = req.body.pagamento;
     const data = req.body.data;

@@ -271,27 +271,25 @@ app.get('/api/venda', async (req, res) => {
   try {
     const id = req.query.id;
 
-    // Busca os dados da venda
     const venda = await db.one(`
       SELECT id_venda, nome_cliente, forma_pagamento, tipo_entrega, tipo_venda, data_entrega
       FROM venda
       WHERE id_venda = $1
     `, [id]);
 
-    // Busca os produtos vinculados à venda
     const produtos = await db.any(`
-      SELECT nome_produto, descr_produto
-      FROM venda_produto
-      WHERE id_venda = $1
+      SELECT p.nome AS nome_produto, p.descr AS descr_produto, p.valor
+      FROM venda_produto vp
+      JOIN produto p ON vp.nome_produto = p.nome AND vp.descr_produto = p.descr
+      WHERE vp.id_venda = $1
     `, [id]);
 
     res.status(200).json({
       ...venda,
       produtos
     });
-
   } catch (error) {
-    console.error('Erro ao buscar venda:', error);
+    console.error("Erro ao buscar venda:", error);
     res.status(400).json({ erro: error.message });
   }
 });
@@ -350,7 +348,7 @@ app.post('/api/vendas', async (req, res) => {
 });
 
 app.put('/api/venda', async (req, res) => {
-  console.log("ID da venda recebido:", req.body.id_venda);
+  console.log("Corpo recebido:", req.body);
   const {
     id_venda,
     nome_cliente,

@@ -174,15 +174,15 @@
       document.getElementById("quant").value = venda.quantidade ?? 1;
 
       const produtoSelect = document.getElementById("produtos-edit");
-      produtoSelect.innerHTML = "";
+        produtoSelect.innerHTML = "";
 
-      venda.produtos.forEach((p) => {
+        venda.produtos.forEach((p) => {
         const option = document.createElement("option");
-        option.value = JSON.stringify(p);
-        option.textContent = `${p.nome_produto} - ${p.descr_produto}`;
+        option.value = JSON.stringify({ nome: p.nome_produto, descr: p.descr_produto });
+        option.textContent = `${p.nome_produto} - ${p.descr_produto} (R$ ${p.valor.replace(".", ",")})`;
         option.selected = true;
         produtoSelect.appendChild(option);
-      });
+        });
 
       document.getElementById("valor").value = "R$ 0,00";
     } catch (error) {

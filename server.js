@@ -10,23 +10,20 @@ const usuario = "postgres";
 const senha = "postgres";
 const db = pgp(`postgres://${usuario}:${senha}@localhost:5432/postgres`);
 
-/*const session = require("express-session");
+const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;*/
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const requireJWTAuth = passport.authenticate("jwt", { session: false });
 
 // Para pegar os dados do formulário
 app.use(express.urlencoded({ extended: true }));
 
 // Servir scripts e assets estáticos
 app.use('/public', express.static(path.join(__dirname, 'public')));
-
-// Para ter acesso as rotas
-const indexRouter = require('./rotas/rotas.js');
-app.use('/', indexRouter);
 
 app.use(express.static('public'));
 
@@ -35,16 +32,122 @@ app.listen(3000, () => {
 });
 
 // Sessão e Autenticação
-/*app.use(
+app.use(
 	session({
 		secret: 'frase_secreta_para_sistema_de_confeitaria_SECRET',
 		resave: false,
 		saveUninitialized: false,
-		cookie: { secure: true },
+		cookie: { secure: false },
 	}),
 );
 app.use(passport.initialize());
-app.use(passport.session());*/
+app.use(passport.session());
+
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: "useremail",
+      passwordField: "password",
+    },
+    async (useremail, password, done) => {
+      try {
+        const user = await db.oneOrNone(
+          "SELECT * FROM usuario WHERE email = $1;",
+          [useremail]
+        );
+
+        if (user) {
+          // Usuário admin encontrado no banco
+          const passwordMatch = await bcrypt.compare(password, user.senha);
+          if (passwordMatch) {
+            return done(null, user);
+          } else {
+            return done(null, false, { message: "Senha incorreta." });
+          }
+        } else {
+          // Usuário não está no banco (não admin)
+          // Aceita login para qualquer usuário "visitante"
+          const guestUser = {
+            ID_usuario: null,
+            email: useremail,
+            permissao: "guest",
+          };
+          return done(null, guestUser);
+        }
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
+
+// Estratégia JWT
+passport.use(
+	new JwtStrategy(
+		{
+			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+			secretOrKey: "your-secret-key",
+		},
+		async (payload, done) => {
+			try {
+				const user = await db.oneOrNone(
+					"SELECT * FROM usuario WHERE email = $1;",
+					[payload.useremail]
+				);
+
+				if (user) {
+					done(null, user);
+				} else {
+					done(null, false);
+				}
+			} catch (error) {
+				done(error, false);
+			}
+		}
+	)
+);
+
+passport.serializeUser((user, cb) => {
+	process.nextTick(() => {
+		return cb(null, {
+			id: user.ID_usuario,
+			username: user.email,
+		});
+	});
+});
+
+passport.deserializeUser((user, cb) => {
+	process.nextTick(() => {
+		return cb(null, user);
+	});
+});
+
+// Rota de login
+app.post(
+  "/login",
+  passport.authenticate("local", { session: false }),
+  (req, res) => {
+    const user = req.user;
+
+    const token = jwt.sign(
+      {
+        useremail: user.email,
+        permissao: user.permissao,
+      },
+      "your-secret-key",
+      { expiresIn: "1h" }
+    );
+
+    res.json({ message: "Login successful", token, permissao: user.permissao });
+  }
+);
+
+app.post("/logout", (req, res, next) => {
+	req.logout((err) => {
+		if (err) return next(err);
+		res.redirect("/");
+	});
+});
 
 // ----- Requisições para Produtos -----
 app.get("/api/produtos", async (req, res) => {
@@ -333,3 +436,6 @@ app.get("/api/entrada", async (req, res) => {
   }
 });
 
+// Para ter acesso as rotas
+const indexRouter = require('./rotas/rotas.js');
+app.use('/', indexRouter);

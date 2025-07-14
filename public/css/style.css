@@ -43,3 +43,15 @@ body {
     max-width: 450px;
     max-height: 450px;
 }
+
+.link-redirecionar {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.2rem;
+}
+
+.link-redirecionar a {
+    text-align: center;
+    text-decoration: underline;
+    cursor: pointer;
+}

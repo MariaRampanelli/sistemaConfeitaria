@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function tabelaDespesas() {
     axios.get('/api/despesas')
     .then((response) => {
-        processaResultadoProduto(response.data);
+        processaResultadoDespesas(response.data);
     }).catch((error) => {
         console.log('Erro ao carregar dados: ', error);
     });
@@ -25,7 +25,7 @@ function processaResultadoDespesas(rows) {
 
     if (rows.length == 0) {
         const p = document.createElement('p');
-        p.textContent = 'Nenhuma despesa cadastrado. Mas assim que cadatrar uma, ela aparecerá aqui!';
+        p.textContent = 'Nenhuma despesa cadastrada. Mas assim que cadatrar uma, ela aparecerá aqui!';
         p.style.color = 'black';
         p.classList.add('text-center', 'mt-3');
         p.style.fontWeight = 'bold';
@@ -54,11 +54,11 @@ function processaResultadoDespesas(rows) {
         tabelaResultado += `<td class="linha-tabela">${rows[i].obs}</td>`;
         tabelaResultado += `<td>
                                 <div class="is-flex is-gap-3">
-                                    <a href="#" class="btn btn-info btn-table" onclick="abreEditarProduto('editar-produto', '${rows[i].nome}', '${rows[i].descr}')">Editar</a>
-                                    <a href="#" class="btn btn-danger btn-table" onclick="deletarProduto('${rows[i].nome}', '${rows[i].descr}')">Deletar</a>
+                                    <a href="#" class="btn btn-info btn-table" onclick="abreEditarDespesa('editar-despesa', '${rows[i].id_despesa}')">Editar</a>
+                                    <a href="#" class="btn btn-danger btn-table" onclick="deletarDespesa('${rows[i].id_despesa}')">Deletar</a>
                                 </div>
                             </td> </tr>`;                  
     }
 
-    tabelaProdutos.innerHTML = tabelaResultado;
+    tabelaDespesas.innerHTML = tabelaResultado;
 }

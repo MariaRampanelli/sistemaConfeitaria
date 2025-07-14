@@ -137,6 +137,13 @@
       sidebar.classList.toggle("active");
     });
   });
+
+  window.onload = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/login';
+    }
+  }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/public/scripts/vendasHtml.js"></script>

@@ -111,4 +111,12 @@
   </main>
 </body>
 <script src="/public/scripts/include.js"></script>
+<script>
+    window.onload = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/login';
+    }
+  }
+</script>
 </html>

@@ -248,8 +248,14 @@ function calcularValor() {
       sidebar.classList.toggle('active');
     });
 });
-</script>
 
+window.onload = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/login';
+    }
+  }
+</script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="../public/scripts/mascaraMonetaria.js"></script>
   <script src="../../public/scripts/acoesForms.js"></script>
